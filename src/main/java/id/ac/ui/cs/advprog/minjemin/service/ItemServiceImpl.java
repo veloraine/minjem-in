@@ -6,7 +6,9 @@ import id.ac.ui.cs.advprog.minjemin.repository.ItemRepository;
 import id.ac.ui.cs.advprog.minjemin.util.ImageProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +17,22 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     ItemRepository itemRepository;
+
+    @Override
+    public Item createItem(String name, String desc, int harga, MultipartFile file) throws IOException {
+        var imageProcessor = ImageProcessor.getInstance();
+        byte[] imageBytes = imageProcessor.convertToByte(file);
+
+        var itemBuilder = Item.builder();
+        var itemName = itemBuilder.name(name);
+        var itemDesc = itemName.desc(desc);
+        var itemHarga = itemDesc.harga(harga);
+        var itemStatus = itemHarga.status("tersedia");
+        var itemImage = itemStatus.profilePic(imageBytes);
+
+        var item = itemImage.build();
+        return itemRepository.save(item);
+    }
 
     @Override
     public List<ItemDTO> getItems(){
