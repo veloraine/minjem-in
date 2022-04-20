@@ -1,13 +1,20 @@
 package id.ac.ui.cs.advprog.minjemin.controller;
 
+import id.ac.ui.cs.advprog.minjemin.service.ItemService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class BaseController {
-    @RequestMapping(method = RequestMethod.GET, path="/")
-    public String index() {
-        return "hello";
+
+    @Autowired
+    ItemService itemService;
+
+    @GetMapping(value="/")
+    public String homepage(Model model) {
+        model.addAttribute("items", itemService.getItems());
+        return "homepage";
     }
 }
