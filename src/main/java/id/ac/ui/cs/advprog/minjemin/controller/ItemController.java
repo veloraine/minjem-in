@@ -18,7 +18,7 @@ public class ItemController {
 
     @GetMapping(value = "/add-item")
     public String createItem(Model model) {
-        return "add_item";
+        return "items/add_item";
     }
 
     @PostMapping(value = "/add-item")
