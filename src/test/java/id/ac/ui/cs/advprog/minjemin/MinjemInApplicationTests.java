@@ -8,6 +8,7 @@ class MinjemInApplicationTests {
 
     @Test
     void contextLoads() {
+        MinjemInApplication.main(new String[0]);
     }
 
 }
