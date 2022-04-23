@@ -1,9 +1,10 @@
 package id.ac.ui.cs.advprog.minjemin.service;
 
-import id.ac.ui.cs.advprog.minjemin.model.Item;
-import id.ac.ui.cs.advprog.minjemin.model.ItemDTO;
-import id.ac.ui.cs.advprog.minjemin.repository.ItemRepository;
-import id.ac.ui.cs.advprog.minjemin.util.ImageProcessor;
+import id.ac.ui.cs.advprog.minjemin.item.model.Item;
+import id.ac.ui.cs.advprog.minjemin.item.model.ItemDTO;
+import id.ac.ui.cs.advprog.minjemin.item.repository.ItemRepository;
+import id.ac.ui.cs.advprog.minjemin.item.service.ItemServiceImpl;
+import id.ac.ui.cs.advprog.minjemin.item.util.ImageProcessor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

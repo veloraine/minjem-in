@@ -1,5 +1,6 @@
 package id.ac.ui.cs.advprog.minjemin.util;
 
+import id.ac.ui.cs.advprog.minjemin.item.util.ImageProcessor;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

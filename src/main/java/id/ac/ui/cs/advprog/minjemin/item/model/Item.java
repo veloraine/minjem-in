@@ -1,4 +1,4 @@
-package id.ac.ui.cs.advprog.minjemin.model;
+package id.ac.ui.cs.advprog.minjemin.item.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

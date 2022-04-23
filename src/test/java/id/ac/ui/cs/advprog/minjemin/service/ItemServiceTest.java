@@ -3,7 +3,6 @@ package id.ac.ui.cs.advprog.minjemin.service;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,7 +17,7 @@ class ItemServiceTest {
 
     @BeforeEach
     void setUp() throws Exception {
-        itemServiceClass = Class.forName("id.ac.ui.cs.advprog.minjemin.service.ItemService");
+        itemServiceClass = Class.forName("id.ac.ui.cs.advprog.minjemin.item.service.ItemService");
     }
 
     @Test
