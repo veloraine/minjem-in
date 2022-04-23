@@ -39,6 +39,10 @@ sonarqube-check:
   allow_failure: true
   only:
     - staging
+  artifacts:
+    when: always
+    paths:
+      - ./build/reports/jacoco/test/html/*
 
 deploy:
   stage: deploy

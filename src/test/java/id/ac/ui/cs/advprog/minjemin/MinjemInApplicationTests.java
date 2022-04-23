@@ -7,8 +7,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 class MinjemInApplicationTests {
 
     @Test
-    void contextLoads() {
-        MinjemInApplication.main(new String[0]);
-    }
+    void contextLoads() { }
 
 }
