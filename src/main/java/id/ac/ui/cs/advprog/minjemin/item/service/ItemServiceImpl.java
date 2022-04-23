@@ -1,9 +1,9 @@
-package id.ac.ui.cs.advprog.minjemin.service;
+package id.ac.ui.cs.advprog.minjemin.item.service;
 
-import id.ac.ui.cs.advprog.minjemin.model.Item;
-import id.ac.ui.cs.advprog.minjemin.model.ItemDTO;
-import id.ac.ui.cs.advprog.minjemin.repository.ItemRepository;
-import id.ac.ui.cs.advprog.minjemin.util.ImageProcessor;
+import id.ac.ui.cs.advprog.minjemin.item.model.Item;
+import id.ac.ui.cs.advprog.minjemin.item.repository.ItemRepository;
+import id.ac.ui.cs.advprog.minjemin.item.model.ItemDTO;
+import id.ac.ui.cs.advprog.minjemin.item.util.ImageProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

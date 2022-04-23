@@ -1,6 +1,7 @@
 package id.ac.ui.cs.advprog.minjemin.controller;
 
-import id.ac.ui.cs.advprog.minjemin.service.ItemServiceImpl;
+import id.ac.ui.cs.advprog.minjemin.landing.controller.BaseController;
+import id.ac.ui.cs.advprog.minjemin.item.service.ItemServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

@@ -1,7 +1,7 @@
-package id.ac.ui.cs.advprog.minjemin.service;
+package id.ac.ui.cs.advprog.minjemin.item.service;
 
-import id.ac.ui.cs.advprog.minjemin.model.Item;
-import id.ac.ui.cs.advprog.minjemin.model.ItemDTO;
+import id.ac.ui.cs.advprog.minjemin.item.model.Item;
+import id.ac.ui.cs.advprog.minjemin.item.model.ItemDTO;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;

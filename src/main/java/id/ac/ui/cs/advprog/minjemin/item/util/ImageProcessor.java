@@ -1,4 +1,4 @@
-package id.ac.ui.cs.advprog.minjemin.util;
+package id.ac.ui.cs.advprog.minjemin.item.util;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.web.multipart.MultipartFile;

@@ -1,5 +1,6 @@
 package id.ac.ui.cs.advprog.minjemin.model;
 
+import id.ac.ui.cs.advprog.minjemin.item.model.ItemDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,7 +16,7 @@ class ItemDTOTest {
 
     @BeforeEach
     void setUp() throws Exception{
-        itemDTOClass = Class.forName("id.ac.ui.cs.advprog.minjemin.model.ItemDTO");
+        itemDTOClass = Class.forName("id.ac.ui.cs.advprog.minjemin.item.model.ItemDTO");
     }
 
     @Test
