@@ -41,7 +41,7 @@ public class ItemServiceImpl implements ItemService {
         List<ItemDTO> itemDTO = new ArrayList<>();
         for (Item item: items) {
             byte[] profileByte = item.getProfilePic();
-            String encode64 = imageProcessor.generateStringImage(profileByte);
+            var encode64 = imageProcessor.generateStringImage(profileByte);
             var objectDTO = new ItemDTO(item.getName(), item.getDesc(), item.getHarga(), encode64);
             itemDTO.add(objectDTO);
         }
