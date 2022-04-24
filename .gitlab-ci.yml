@@ -2,6 +2,9 @@ image: gradle:7.4-jdk11-alpine
 
 variables:
   GRADLE_OPTS: '-Dorg.gradle.daemon=false'
+  POSTGRES_ENABLED: "false"
+  DISABLE_SPRING_DATASOURCE_URL: "true"
+
 
 before_script:
   - echo "Semoga hasil code yang di push akan berlajan dengan baik dan lancar."
@@ -20,6 +23,8 @@ build:
   stage: build
   script:
     - gradle assemble
+  only:
+    - staging
 
 sonarqube-check:
   stage: test

@@ -1,4 +1,4 @@
-package id.ac.ui.cs.advprog.minjemin.controller;
+package id.ac.ui.cs.advprog.minjemin.landing.controller;
 
 import id.ac.ui.cs.advprog.minjemin.landing.controller.BaseController;
 import id.ac.ui.cs.advprog.minjemin.item.service.ItemServiceImpl;

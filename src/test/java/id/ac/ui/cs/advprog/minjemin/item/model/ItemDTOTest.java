@@ -1,4 +1,4 @@
-package id.ac.ui.cs.advprog.minjemin.model;
+package id.ac.ui.cs.advprog.minjemin.item.model;
 
 import id.ac.ui.cs.advprog.minjemin.item.model.ItemDTO;
 import org.junit.jupiter.api.BeforeEach;
