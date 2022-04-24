@@ -32,6 +32,28 @@ dependencies {
     runtimeOnly 'org.postgresql:postgresql'
 }
 
+
+sonarqube {
+    properties {
+        property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml"
+    }
+}
+
+
+jacocoTestReport {
+    reports{
+        html.enabled true
+        xml.enabled true
+    }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: ['**/*Application**', '**/*exception/', "id/ac/ui/cs/advprog/minjemin/MinjemInApplication.java"])
+        }))
+    }
+}
+
+test.finalizedBy jacocoTestReport
+
 tasks.named('test') {
     useJUnitPlatform()
 }
