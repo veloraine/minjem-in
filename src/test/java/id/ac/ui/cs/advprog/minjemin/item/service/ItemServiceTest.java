@@ -1,4 +1,4 @@
-package id.ac.ui.cs.advprog.minjemin.service;
+package id.ac.ui.cs.advprog.minjemin.item.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
