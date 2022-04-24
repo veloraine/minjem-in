@@ -2,8 +2,15 @@ image: gradle:7.4-jdk11-alpine
 
 variables:
   GRADLE_OPTS: '-Dorg.gradle.daemon=false'
-  POSTGRES_ENABLED: "false"
-  DISABLE_SPRING_DATASOURCE_URL: "true"
+#  POSTGRES_ENABLED: "false"
+#  DISABLE_SPRING_DATASOURCE_URL: "true"
+  DATABASE_URL: jdbc:postgresql://postgres:5432/postgres
+  POSTGRES_USER: postgres
+  POSTGRES_DB: postgres
+  POSTGRES_PASSWORD: postgres
+  SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres
+  SPRING_DATASOURCE_USER: postgres
+  SPRING_DATASOURCE_PASSWORD: postgres
 
 
 before_script:
@@ -43,14 +50,7 @@ sonarqube-check:
     - grep -Po "Total.*?([0-9]{1,3})%" ./build/reports/jacoco/test/html/index.html
   services:
     - "postgres:latest"
-    variables:
-      DATABASE_URL: jdbc:postgresql://postgres:5432/postgres
-      POSTGRES_USER: postgres
-      POSTGRES_DB: postgres
-      POSTGRES_PASSWORD: postgres
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres
-      SPRING_DATASOURCE_USER: postgres
-      SPRING_DATASOURCE_PASSWORD: postgres
+
   allow_failure: true
   only:
     - staging
