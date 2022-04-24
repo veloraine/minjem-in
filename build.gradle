@@ -47,7 +47,7 @@ jacocoTestReport {
     }
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: ['**/*Application**', '**/*exception/'])
+            fileTree(dir: it, exclude: ['**/*Application**', '**/*exception/', "id/ac/ui/cs/advprog/minjemin/MinjemInApplication.java"])
         }))
     }
 }
