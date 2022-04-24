@@ -26,7 +26,7 @@ class ItemControllerTest {
 
     @Test
     void whenGetAddItemReturnStatus200() throws Exception {
-        mockMvc.perform(get("/add-item"))
+        mockMvc.perform(get("/admin/create"))
                 .andExpect(status().isOk())
                 .andExpect(handler().methodName("createItem"))
                 .andExpect(model().attributeDoesNotExist())
@@ -36,7 +36,7 @@ class ItemControllerTest {
     @Test
     void whenPostAddItemShouldCallItemService() throws Exception {
         MockMultipartFile file = new MockMultipartFile("file", "Figure.jpeg", "image/jpeg", "ryzafigure".getBytes());
-        mockMvc.perform(multipart("/add-item")
+        mockMvc.perform(multipart("/admin/create")
                 .file(file)
                 .param("name","Figurine Ryza")
                 .param("desc", "ini adalah figurine terbaru Ryza")
@@ -48,13 +48,13 @@ class ItemControllerTest {
     @Test
     void whenPOstAddItemFailedShouldGoToExceptionBlock() throws Exception{
         MockMultipartFile fileGoku = new MockMultipartFile("file", "Goku.jpeg", "image/jpeg", "figurgoku".getBytes());
-        when(mockMvc.perform(multipart("/add-item")
+        when(mockMvc.perform(multipart("/admin/create")
                 .file(fileGoku)
                 .param("name","Figurine Goku")
                 .param("desc", "kamehamehaaaaa!")
                 .param("harga", "9000"))).thenThrow(new IOException());
 
-        mockMvc.perform(multipart("/add-item")
+        mockMvc.perform(multipart("/admin/create")
                 .file(fileGoku)
                 .param("name","Figurine Goku")
                 .param("desc", "kamehamehaaaaa!")
