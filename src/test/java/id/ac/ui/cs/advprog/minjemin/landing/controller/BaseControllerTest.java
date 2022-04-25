@@ -1,6 +1,6 @@
 package id.ac.ui.cs.advprog.minjemin.landing.controller;
 
-import id.ac.ui.cs.advprog.minjemin.landing.controller.BaseController;
+import id.ac.ui.cs.advprog.minjemin.auth.service.MinjeminUserDetailsService;
 import id.ac.ui.cs.advprog.minjemin.item.service.ItemServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +17,9 @@ class BaseControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @MockBean
+    private MinjeminUserDetailsService minjeminUserDetailsService;
 
     @MockBean
     private ItemServiceImpl itemService;

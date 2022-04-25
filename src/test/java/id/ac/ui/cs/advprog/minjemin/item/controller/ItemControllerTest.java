@@ -1,6 +1,6 @@
 package id.ac.ui.cs.advprog.minjemin.item.controller;
 
-import id.ac.ui.cs.advprog.minjemin.item.controller.ItemController;
+import id.ac.ui.cs.advprog.minjemin.auth.service.MinjeminUserDetailsService;
 import id.ac.ui.cs.advprog.minjemin.item.model.Item;
 import id.ac.ui.cs.advprog.minjemin.item.service.ItemServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,11 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -25,6 +23,9 @@ class ItemControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @MockBean
+    private MinjeminUserDetailsService minjeminUserDetailsService;
 
     @MockBean
     private ItemServiceImpl itemService;

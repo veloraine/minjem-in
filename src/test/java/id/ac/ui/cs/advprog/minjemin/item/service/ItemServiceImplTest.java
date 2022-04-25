@@ -3,7 +3,6 @@ package id.ac.ui.cs.advprog.minjemin.item.service;
 import id.ac.ui.cs.advprog.minjemin.item.model.Item;
 import id.ac.ui.cs.advprog.minjemin.item.model.ItemDTO;
 import id.ac.ui.cs.advprog.minjemin.item.repository.ItemRepository;
-import id.ac.ui.cs.advprog.minjemin.item.service.ItemServiceImpl;
 import id.ac.ui.cs.advprog.minjemin.item.util.ImageProcessor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,7 +12,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mock.web.MockMultipartFile;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
