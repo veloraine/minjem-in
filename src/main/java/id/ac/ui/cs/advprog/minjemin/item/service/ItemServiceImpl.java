@@ -21,8 +21,9 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public Item getItemById(String id) {
         List<Item> tmp = itemRepository.findAll();
-        var temp = itemRepository.findItemById(id);
-        return temp;
+        if (!tmp.isEmpty())
+            return itemRepository.findItemById(id);
+        return null;
     }
 
     @Override
@@ -45,11 +46,13 @@ public class ItemServiceImpl implements ItemService {
     public void updateItem(String id, String name, String desc, int harga, MultipartFile file) throws IOException {
         var tmp = itemRepository.findAll();
         var item = itemRepository.findItemById(id);
-        item.setName(name);
-        item.setDesc(desc);
-        item.setHarga(harga);
+        if (!tmp.isEmpty()) {
+            item.setName(name);
+            item.setDesc(desc);
+            item.setHarga(harga);
+        }
 
-        if (file.isEmpty() || file == null) {
+        if (file.isEmpty()) {
             item.setProfilePic(item.getProfilePic());
             itemRepository.save(item);
         } else {
@@ -68,7 +71,7 @@ public class ItemServiceImpl implements ItemService {
         List<ItemDTO> itemDTO = new ArrayList<>();
         for (Item item: items) {
             byte[] profileByte = item.getProfilePic();
-            var encode64 = imageProcessor.generateStringImage(profileByte);
+            String encode64 = imageProcessor.generateStringImage(profileByte);
             var objectDTO = new ItemDTO(item.getId(), item.getName(), item.getDesc(), item.getHarga(), encode64);
             itemDTO.add(objectDTO);
         }
@@ -77,10 +80,8 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public void deleteItem(String id) {
-        List<Item> items = itemRepository.findAll();
-        var item = itemRepository.findItemById(id);
-        if(item != null)
-            itemRepository.delete(item);
+        var item = itemRepository.getById(id);
+        itemRepository.delete(item);
 
     }
 }

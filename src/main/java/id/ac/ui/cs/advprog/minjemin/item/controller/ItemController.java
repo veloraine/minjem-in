@@ -11,6 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping(path = "/admin")
 public class ItemController {
 
+    private static final String REDIRECT = "redirect:/admin/";
+
     @Autowired
     ItemService itemService;
 
@@ -35,15 +37,15 @@ public class ItemController {
             itemService.createItem(name, desc, harga, file);
         }
         catch (Exception e) {
-            return "redirect:/admin/";
+            return REDIRECT;
         }
-        return "redirect:/admin/";
+        return REDIRECT;
     }
 
     @GetMapping(path = "/update/{id}")
     public String updateItem(@PathVariable(value = "id") String id, Model model) {
         model.addAttribute("item", itemService.getItemById(id));
-        return "admin/update";
+        return "items/update";
     }
 
     @PostMapping(value = "/update/{id}")
@@ -57,14 +59,14 @@ public class ItemController {
 
         }
         catch (Exception e) {
-            return "redirect:/admin/";
+            return REDIRECT;
         }
-        return "redirect:/admin/";
+        return REDIRECT;
     }
 
     @GetMapping(path = "/delete/{id}")
     public String deleteItem(@PathVariable(value = "id") String id, Model model) {
         itemService.deleteItem(id);
-        return "redirect:/admin/";
+        return REDIRECT;
     }
 }
