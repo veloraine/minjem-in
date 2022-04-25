@@ -90,6 +90,17 @@ class ItemControllerTest {
     }
 
     @Test
+    void whenGetUpdateItemReturnStatus200() throws Exception {
+        when(itemService.getItemById("9000")).thenReturn(item);
+
+        mockMvc.perform(get("/admin/update/9000"))
+                .andExpect(status().isOk())
+                .andExpect(handler().methodName("updateItem"))
+                .andExpect(model().attributeDoesNotExist())
+                .andExpect(view().name("items/update"));
+    }
+
+    @Test
     void whenPostUpdateItemShouldCallItemService() throws Exception {
         MockMultipartFile file = new MockMultipartFile("file", "Figure.jpeg", "image/jpeg", "ryzafigure".getBytes());
         mockMvc.perform(multipart("/admin/update/9000")
