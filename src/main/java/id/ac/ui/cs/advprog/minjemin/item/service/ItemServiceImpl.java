@@ -19,6 +19,14 @@ public class ItemServiceImpl implements ItemService {
     ItemRepository itemRepository;
 
     @Override
+    public Item getItemById(String id) {
+        List<Item> tmp = itemRepository.findAll();
+        if (!tmp.isEmpty())
+            return itemRepository.findItemById(id);
+        return null;
+    }
+
+    @Override
     public Item createItem(String name, String desc, int harga, MultipartFile file) throws IOException {
         var imageProcessor = ImageProcessor.getInstance();
         byte[] imageBytes = imageProcessor.convertToByte(file);
@@ -35,16 +43,45 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    public void updateItem(String id, String name, String desc, int harga, MultipartFile file) throws IOException {
+        var tmp = itemRepository.findAll();
+        var item = itemRepository.findItemById(id);
+        if (!tmp.isEmpty()) {
+            item.setName(name);
+            item.setDesc(desc);
+            item.setHarga(harga);
+        }
+
+        if (file.isEmpty()) {
+            item.setProfilePic(item.getProfilePic());
+            itemRepository.save(item);
+        } else {
+            var imageProcessor = ImageProcessor.getInstance();
+            byte[] imageBytes = imageProcessor.convertToByte(file);
+
+            item.setProfilePic(imageBytes);
+            itemRepository.save(item);
+        }
+    }
+
+    @Override
     public List<ItemDTO> getItems(){
         var imageProcessor = ImageProcessor.getInstance();
         List<Item> items = itemRepository.findAll();
         List<ItemDTO> itemDTO = new ArrayList<>();
         for (Item item: items) {
             byte[] profileByte = item.getProfilePic();
-            var encode64 = imageProcessor.generateStringImage(profileByte);
-            var objectDTO = new ItemDTO(item.getName(), item.getDesc(), item.getHarga(), encode64);
+            String encode64 = imageProcessor.generateStringImage(profileByte);
+            var objectDTO = new ItemDTO(item.getId(), item.getName(), item.getDesc(), item.getHarga(), encode64);
             itemDTO.add(objectDTO);
         }
         return itemDTO;
+    }
+
+    @Override
+    public void deleteItem(String id) {
+        var item = itemRepository.getById(id);
+        itemRepository.delete(item);
+
     }
 }
