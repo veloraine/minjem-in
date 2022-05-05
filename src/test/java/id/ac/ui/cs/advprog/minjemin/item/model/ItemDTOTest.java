@@ -26,10 +26,11 @@ class ItemDTOTest {
 
     @Test
     void testMakeAnItemDTO() {
-        var itemDTOOne = new ItemDTO("1", "item1", "an item made of steel", 500, "clankclank");
+        var itemDTOOne = new ItemDTO("1", "item1", "an item made of steel", 500, "tersedia", "clankclank");
         assertEquals("item1", itemDTOOne.getName());
         assertEquals("an item made of steel", itemDTOOne.getDesc());
         assertEquals(500, itemDTOOne.getHarga());
+        assertEquals("tersedia", itemDTOOne.getStatus());
         assertEquals("clankclank", itemDTOOne.getBase64Image());
     }
 
