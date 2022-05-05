@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(controllers = PeminjamanController.class)
-public class PeminjamanControllerTest {
+class PeminjamanControllerTest {
     private UserDTO userDto;
     private User user;
     private Item item;

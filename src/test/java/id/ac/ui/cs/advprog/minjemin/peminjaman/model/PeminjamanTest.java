@@ -10,7 +10,7 @@ import java.lang.reflect.Modifier;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-public class PeminjamanTest {
+class PeminjamanTest {
     private Class<?> peminjamanClass;
 
     @BeforeEach
