@@ -52,7 +52,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="item : ${items}">
+                        <tr th:each="item : ${items}" th:if="${item.getStatus() == 'tersedia'}">
                             <td>
                                 <img th:src="|data:image;base64,*{item.getBase64Image()}|" class="product-image", style="width: 150px">
                             </td>
@@ -68,7 +68,7 @@
                             <td>
                                 <a class="btn btn-primary btn-sm">
                                     Detail</a>
-                                <a class="btn btn-primary btn-sm">
+                                <a class="btn btn-primary btn-sm" th:href="@{peminjaman/pinjam/{id}(id = ${item.getId()})}">
                                     Pinjam</a>
                             </td>
                         </tr>
