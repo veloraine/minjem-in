@@ -1,5 +1,6 @@
 package id.ac.ui.cs.advprog.minjemin.item.controller;
 
+import id.ac.ui.cs.advprog.minjemin.auth.service.SecurityService;
 import id.ac.ui.cs.advprog.minjemin.item.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,14 +17,19 @@ public class ItemController {
     @Autowired
     ItemService itemService;
 
+    @Autowired
+    SecurityService securityService;
+
     @GetMapping(path = "/")
     public String dashboardAdmin(Model model) {
         model.addAttribute("items", itemService.getItems());
+        model.addAttribute("sessionId", securityService.findLoggedInUserDetails());
         return "admin/dashboard";
     }
 
     @GetMapping(value = "/create")
     public String createItem(Model model) {
+        model.addAttribute("sessionId", securityService.findLoggedInUserDetails());
         return "items/add_item";
     }
 
@@ -45,6 +51,7 @@ public class ItemController {
     @GetMapping(path = "/update/{id}")
     public String updateItem(@PathVariable(value = "id") String id, Model model) {
         model.addAttribute("item", itemService.getItemById(id));
+        model.addAttribute("sessionId", securityService.findLoggedInUserDetails());
         return "items/update";
     }
 

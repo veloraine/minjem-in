@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .navbar-color{
+            background-color: rgb(10, 27, 69);
+        }
+        .navbar-brand {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<nav th:fragment="navbar_with_login" class="navbar navbar-light navbar-color">
+    <div class="container-fluid">
+        <a class="navbar-brand text-white" href="/">Minjem.in</a>
+        <div class ="d-flex flex-row-reverse">
+            <div class = "p-2">
+                <form th:action="@{/auth/login}" method="get">
+                    <button class="btn btn-warning" name="login" value="login">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</nav>
+</body>
+</html>
