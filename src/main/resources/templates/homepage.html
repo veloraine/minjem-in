@@ -9,12 +9,13 @@
     <link href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <link th:href="@{css/main.css}" rel="stylesheet" />
-
-
 </head>
-
 <body>
-<nav th:insert="navbar" />
+<div th:switch="${sessionId != null}">
+    <nav th:case="${true}" th:insert="fragments/navbar_with_logout" />
+    <nav th:case="*" th:insert="fragments/navbar_with_login"/>
+</div>
+
 <div class="my-4 d-flex justify-content-center">
     <div class="container">
         <div class="row justify-content-md-center">
@@ -26,8 +27,6 @@
                 </div>
             </div>
             <div class="col-md-10 mt-5">
-
-
                 <!--Playlist Table-->
                 <div th:if="${items} != null">
                     <h4 class="text-left lh-lg">Halo, ingin minjem apa hari ini?</h4>
