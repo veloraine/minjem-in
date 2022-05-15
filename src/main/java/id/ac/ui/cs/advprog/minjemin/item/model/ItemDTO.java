@@ -12,6 +12,7 @@ public class ItemDTO {
     String name;
     String desc;
     int harga;
+    String status;
     String base64Image;
 
 }

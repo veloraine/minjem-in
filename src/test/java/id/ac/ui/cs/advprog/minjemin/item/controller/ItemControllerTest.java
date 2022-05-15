@@ -1,30 +1,38 @@
 package id.ac.ui.cs.advprog.minjemin.item.controller;
 
-import id.ac.ui.cs.advprog.minjemin.item.controller.ItemController;
+import id.ac.ui.cs.advprog.minjemin.auth.service.MinjeminUserDetailsService;
+import id.ac.ui.cs.advprog.minjemin.auth.service.SecurityService;
 import id.ac.ui.cs.advprog.minjemin.item.model.Item;
 import id.ac.ui.cs.advprog.minjemin.item.service.ItemServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+@AutoConfigureMockMvc(addFilters = false)
 @WebMvcTest(controllers = ItemController.class)
 class ItemControllerTest {
     Item item;
 
     @Autowired
     private MockMvc mockMvc;
+
+    @MockBean
+    private SecurityService securityService;
+
+    @MockBean
+    private MinjeminUserDetailsService minjeminUserDetailsService;
 
     @MockBean
     private ItemServiceImpl itemService;
@@ -39,6 +47,7 @@ class ItemControllerTest {
                 .profilePic("scouter".getBytes())
                 .build();
         item.setId("item-1");
+        Mockito.reset(securityService, minjeminUserDetailsService);
     }
 
     @Test
