@@ -59,10 +59,10 @@ public class PeminjamanCreator {
     public String updateItemStatus(String itemId, ItemRepository itemRepository) {
         var item = itemRepository.getById(itemId);
         var itemStatus = item.getStatus();
-        if (itemStatus.equals("tidak tersedia")) {
+        if (itemStatus.equals("tidak tersedia") || itemStatus.equals("menunggu persetujuan")) {
             return "Status barang sudah tidak tersedia";
         }
-        item.setStatus("tidak tersedia");
+        item.setStatus("menunggu persetujuan");
         return "Status barang berhasil diupdate";
     }
     public boolean cekTanggal(String tanggalMulai, String tanggalSelesai) {
