@@ -27,6 +27,16 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    public ItemDTO getItemDTOById(String id) {
+        List<ItemDTO> tmp = getItems();
+        for (ItemDTO item:tmp) {
+            if (item.getId() == id) return item;
+        }
+
+        return null;
+    }
+
+    @Override
     public Item createItem(String name, String desc, int harga, MultipartFile file) throws IOException {
         var imageProcessor = ImageProcessor.getInstance();
         byte[] imageBytes = imageProcessor.convertToByte(file);
@@ -61,6 +71,16 @@ public class ItemServiceImpl implements ItemService {
 
             item.setProfilePic(imageBytes);
             itemRepository.save(item);
+        }
+    }
+
+    @Override
+    public void updateStatusItem(String id, int code) {
+        Item item = itemRepository.getById(id);
+        if (code == 1) {
+            item.setStatus("tidak tersedia");
+        } else if (code == 2) {
+            item.setStatus("tersedia");
         }
     }
 

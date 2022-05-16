@@ -1,6 +1,8 @@
 package id.ac.ui.cs.advprog.minjemin.item.controller;
 
+import id.ac.ui.cs.advprog.minjemin.auth.service.UserService;
 import id.ac.ui.cs.advprog.minjemin.item.service.ItemService;
+import id.ac.ui.cs.advprog.minjemin.peminjaman.service.PeminjamanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +18,24 @@ public class ItemController {
     @Autowired
     ItemService itemService;
 
+    @Autowired
+    PeminjamanService peminjamanService;
+
+    @Autowired
+    UserService userService;
+
     @GetMapping(path = "/")
     public String dashboardAdmin(Model model) {
         model.addAttribute("items", itemService.getItems());
         return "admin/dashboard";
+    }
+
+    @GetMapping(path = "/tabel-pengajuan")
+    public String tabelPengajuan(Model model) {
+        model.addAttribute("peminjaman", peminjamanService.getAllPeminjaman());
+        model.addAttribute("itemService", itemService);
+        model.addAttribute("userService", userService);
+        return "admin/tabel_pengajuan";
     }
 
     @GetMapping(value = "/create")
@@ -69,4 +85,17 @@ public class ItemController {
         itemService.deleteItem(id);
         return REDIRECT;
     }
+
+    @GetMapping(path = "/tabel-pengajuan/terimaPeminjaman/{id}")
+    public String terimaPinjam(@PathVariable(value = "id") String id, Model model) {
+        peminjamanService.terimaPeminjaman(id);
+        return "redirect:/admin/tabel-pengajuan/";
+    }
+
+    @GetMapping(path = "/tabel-pengajuan/tolakPeminjaman/{id}")
+    public String tolakPinjam(@PathVariable(value = "id") String id, Model model) {
+        peminjamanService.tolakPeminjaman(id);
+        return "redirect:/admin/tabel-pengajuan/";
+    }
+
 }
