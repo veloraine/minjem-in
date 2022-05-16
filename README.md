@@ -27,23 +27,9 @@ Minjem.in adalah platform pinjam meminjam barang untuk memenuhi kebutuhan mahasi
 [minjem-in-staging.herokuapp.com](https://minjem-in-staging.herokuapp.com/)
 
 ### What's new
-1. Register:
-   - Pengguna aplikasi dapat membuat akun agar bisa melakukan fitur login.
-2. Login:
-    - Pengguna aplikasi dapat masuk dengan menggunakan akunnya masing-masing agar dapat memanfaatkan fitur yang terdapat di dalam web secara maksimal.
-3. Logout:
-    - Pengguna yang sebelumnya sudah terdaftar & masuk dapat keluar dari website.
-4. CUD Admin:
-    - Create: Admin dapat membuat produk yang dapat dipinjam oleh pengguna.
-    - Update: Admin dapat melakukan pembaharuan informasi terhadap produk yang sudah ada.
-    - Delete: Admin dapat menghapus produk yang telah dibuat.
-5. Etalase produk Admin (Read Admin)
-    - Read: Admin dapat melihat data produk yang telah dibuat (dalam bentuk etalase).
-    - Laman ini hanya dapat diakses oleh Admin.
-    - Perbedaan laman ini dengan etalase produk untuk pengguna adalah terdapat tombol Create, Update, dan Delete.
-6. Etalase produk Pengguna
-    - Pengguna dapat melihat dan meminjam berbagai produk yang ditampilkan. Terdapat nama produk dan gambar produk untuk masing-masing barang.
-    - Pengguna dapat melihat produk dengan urutan harga (termurah/termahal) maupun secara alphabetical.
+1. Laman pengajuan peminjaman (oleh Brandon)
+   - Pengguna dapat melakukan pengecekan ulang permintaan peminjaman yang telah Ia lakukan. Laman ini berisi rincian dari peminjaman yang akan Ia lakukan dan tombol "Ajukan Peminjaman" yang akan melakukan aksi pengajuan peminjaman. Pengajuan ini dapat diterima ataupun ditolak oleh Admin.
+
 
 
     
