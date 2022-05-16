@@ -30,6 +30,12 @@ Minjem.in adalah platform pinjam meminjam barang untuk memenuhi kebutuhan mahasi
 1. Laman pengajuan peminjaman (oleh Brandon)
    - Pengguna dapat melakukan pengecekan ulang permintaan peminjaman yang telah Ia lakukan. Laman ini berisi rincian dari peminjaman yang akan Ia lakukan dan tombol "Ajukan Peminjaman" yang akan melakukan aksi pengajuan peminjaman. Pengajuan ini dapat diterima ataupun ditolak oleh Admin.
 
+2. Halaman daftar pengajuan peminjaman untuk admin (oleh Zaki)
+   - Pada halaman ini, Admin dapat melihat seluruh daftar pengajuan pinjaman yang masih berstatus menunggu persetujuan. Halaman ini berisi tabel data peminjaman dengan beberapa informasi terkait peminjaman. Pada halaman ini terdapat tombol aksi untuk menolak atau menerima pengajuan peminjaman.
+
+3. Tolak atau terima pengajuan peminjaman (oleh Zaki)
+   - Admin dapat menolak atau menerima pengajuan peminjaman melalui halaman yang telah disebutkan pada poin sebelumnya.  
+
 
 
     
