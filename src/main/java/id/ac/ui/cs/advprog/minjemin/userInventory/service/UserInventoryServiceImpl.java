@@ -11,6 +11,7 @@ import id.ac.ui.cs.advprog.minjemin.userInventory.model.UserInventoryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -31,6 +32,7 @@ public class UserInventoryServiceImpl implements UserInventoryService {
     ItemRepository itemRepository;
 
     @Override
+    @Transactional
     public List<UserInventoryDTO> showUserInventory() throws ParseException {
         var usernamePengguna = securityService.findLoggedInUserDetails().getUsername();
         var userLogin = userRepository.findByUsername(usernamePengguna).get();
@@ -57,7 +59,7 @@ public class UserInventoryServiceImpl implements UserInventoryService {
             var statusPembayaran = item.getStatusPembayaran();
             var statusPeminjaman = item.getStatus();
 
-            var calcTanggalMulai = tanggalMulai.substring(0, 2) + '/' + tanggalMulai.substring(3, 5) + '/' + tanggalMulai.substring(6, 10);
+            var calcTanggalMulai = tanggalMulai.substring(8, 10) + '/' +  tanggalMulai.substring(5, 7) + '/' + tanggalMulai.substring(0, 4);
             var sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
             var parsedTanggalMulai = sdf.parse(calcTanggalMulai);
             var tanggalSekarang = new Date();

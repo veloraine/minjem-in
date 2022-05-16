@@ -14,7 +14,10 @@
 </head>
 
 <body>
-<nav th:insert="navbar" />
+<div th:switch="${sessionId != null}">
+  <nav th:case="${true}" th:insert="fragments/navbar_with_logout" />
+  <nav th:case="*" th:insert="fragments/navbar_with_login"/>
+</div>
 <div class="my-4 d-flex justify-content-center">
   <div class="container">
     <div class="row justify-content-md-center">
@@ -39,7 +42,7 @@
                 Nama
               </th>
               <th scope="col">
-                Harga per Hari
+                Biaya
               </th>
               <th scope="col">
                 Tanggal Peminjaman
@@ -67,7 +70,7 @@
                 <a th:text="${item.getNama()}"></a>
               </td>
               <td>
-                <a th:text="'Rp.' + ${item.getHarga()}+ ',00'"></a>
+                <a th:text="'Rp.' + ${item.getBiaya()}+ ',00'"></a>
               </td>
               <td>
                 <a th:text="${item.getTanggalMulai()}"></a>
