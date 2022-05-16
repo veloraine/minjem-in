@@ -9,8 +9,10 @@ import java.util.List;
 
 public interface ItemService {
     Item getItemById(String id);
+    ItemDTO getItemDTOById(String id);
     Item createItem(String name, String desc, int harga, MultipartFile file) throws IOException;
     void updateItem(String id, String name, String desc, int harga, MultipartFile file) throws IOException;
     void deleteItem(String id);
+    void updateStatusItem(String id, int code);
     List<ItemDTO> getItems();
 }

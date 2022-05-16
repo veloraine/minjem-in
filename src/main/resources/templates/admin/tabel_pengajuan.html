@@ -8,7 +8,7 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-    <link th:href="@{../css/main.css}" rel="stylesheet" />
+    <link th:href="@{../../css/main.css}" rel="stylesheet" />
 
 
 </head>
@@ -21,32 +21,27 @@
             <div class="col-md-15">
                 <div class="w-50 my-5 p-3">
                     <h1 class="title-header">Minjem.in</h1>
-                    <a class="btn btn-primary btn-sm" th:href="@{tabel-pengajuan/}">
-                        Cek Pengajuan Pinjaman</a>
+                    <a class="btn btn-primary btn-sm" th:href="@{../}">
+                        Kembali ke Dashboard</a>
+                    <div class="col-md-10 mt-5">
                 </div>
             </div>
-            <div class="col-md-10 mt-5">
-
-
                 <!--Playlist Table-->
-                <div th:if="${items} != null">
+                <div th:if="${peminjaman} != null">
                     <table id="example" class="table table-hover table-dark">
                         <thead>
                         <tr>
                             <th scope="col">
-                                Image
+                                Nama Barang
                             </th>
                             <th scope="col">
-                                Nama
+                                Gambar
                             </th>
                             <th scope="col">
-                                Deskripsi
+                                Tanggal Mulai
                             </th>
                             <th scope="col">
-                                Harga per Hari
-                            </th>
-                            <th scope="col">
-                                Status
+                                Tanggal Selesai
                             </th>
                             <th scope="col">
                                 Action
@@ -54,40 +49,28 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="item : ${items}">
+                        <tr th:each="pinjam : ${peminjaman}" th:if="${pinjam.getStatus() == 'menunggu persetujuan'}">
                             <td>
-                                <img th:src="|data:image;base64,*{item.getBase64Image()}|" class="product-image", style="width: 150px">
+                                <a th:text="${itemService.getItemById(pinjam.getItemId()).getName()}"></a>
                             </td>
                             <td>
-                                <a th:text="${item.getName()}"></a>
+<!--                                <img th:src="|data:image;base64,*{itemService.getItemDTOById(pinjam.getItem_id()).getBase64Image()}|" class="product-image", style="width: 150px">-->
                             </td>
                             <td>
-                                <a th:text="${item.getDesc()}"></a>
+                                <a th:text="${pinjam.getTanggalMulai()}"></a>
                             </td>
                             <td>
-                                <a th:text="'Rp.' + ${item.getHarga()}+ ',00'"></a>
+                                <a th:text="${pinjam.getTanggalSelesai()}"></a>
                             </td>
                             <td>
-                                <a th:if="${item.getStatus()} == 'tersedia'">Tersedia</a>
-                                <a th:if="${item.getStatus()} == 'menunggu persetujuan'">
-                                    Menunggu persetujuan peminjaman
-                                </a>
-                                <a th:if="${item.getStatus()} == 'tidak tersedia'">Sudah dipinjam</a>
-                            </td>
-                            <td>
-                                <a class="btn btn-primary btn-sm"
-                                th:href="@{update/{id}(id = ${item.getId()})}">
-                                    Update</a>
-                                <a class="btn btn-primary btn-sm"
-                                th:href="@{delete/{id}(id = ${item.getId()})}">
-                                    Delete</a>
+                                <a class="btn btn-primary btn-sm" th:href="@{terimaPeminjaman/{id}(id = ${pinjam.getId()})}">
+                                    Terima</a>
+                                <a class="btn btn-primary btn-sm" th:href="@{tolakPeminjaman/{id}(id = ${pinjam.getId()})}">
+                                    Tolak</a>
                             </td>
                         </tr>
                         </tbody>
                     </table>
-                    <a class="btn btn-primary btn-sm"
-                    th:href="@{create}">
-                       Create</a>
                 </div>
             </div>
         </div>

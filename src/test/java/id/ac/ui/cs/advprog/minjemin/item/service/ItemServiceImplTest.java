@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mock.web.MockMultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -131,6 +132,20 @@ class ItemServiceImplTest {
         itemService.updateItem("0", newName, item.getDesc(), item.getHarga(), file);
         assertNotEquals(item.getName(), pastname);
         assertEquals(item.getProfilePic(), pastPic);
+    }
+
+    @Test
+    void testUpdateStatusItemWhen1(){
+        when(itemRepository.getById("item-1")).thenReturn(item);
+        itemService.updateStatusItem("item-1",1);
+        assertEquals("tidak tersedia", item.getStatus());
+    }
+
+    @Test
+    void testUpdateStatusItemWhen2(){
+        when(itemRepository.getById("item-1")).thenReturn(item);
+        itemService.updateStatusItem("item-1",2);
+        assertEquals("tersedia", item.getStatus());
     }
 
 
