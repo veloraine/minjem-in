@@ -36,7 +36,11 @@ Minjem.in adalah platform pinjam meminjam barang untuk memenuhi kebutuhan mahasi
 3. Tolak atau terima pengajuan peminjaman (oleh Zaki)
    - Admin dapat menolak atau menerima pengajuan peminjaman melalui halaman yang telah disebutkan pada poin sebelumnya.  
 
+4. Laman user inventory (oleh Ricky)
+   - User dapat melihat seluruh peminjaman yang sedang Ia lakukan maupun yang sedang Ia ajukan. Selain itu, pengguna juga dapat melihat durasi peminjaman yang telah Ia lakukan dan biaya yang harus Ia bayarkan.
 
+  
+   
 
     
 
