@@ -9,11 +9,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PeminjamanDTO {
     String id;
-    String user_id;
-    String item_id;
-    String tanggal_mulai;
-    String tanggal_selesai;
+    String userId;
+    String itemId;
+    String tanggalMulai;
+    String tanggalSelesai;
     String status;
-    String status_pembayaran;
+    String statusPembayaran;
 }
 

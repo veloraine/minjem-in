@@ -30,7 +30,7 @@ public class ItemServiceImpl implements ItemService {
     public ItemDTO getItemDTOById(String id) {
         List<ItemDTO> tmp = getItems();
         for (ItemDTO item:tmp) {
-            if (item.getId() == id) return item;
+            if (item.getId().equals(id)) return item;
         }
 
         return null;

@@ -51,16 +51,16 @@
                         <tbody>
                         <tr th:each="pinjam : ${peminjaman}" th:if="${pinjam.getStatus() == 'menunggu persetujuan'}">
                             <td>
-                                <a th:text="${itemService.getItemById(pinjam.getItem_id()).getName()}"></a>
+                                <a th:text="${itemService.getItemById(pinjam.getItemId()).getName()}"></a>
                             </td>
                             <td>
 <!--                                <img th:src="|data:image;base64,*{itemService.getItemDTOById(pinjam.getItem_id()).getBase64Image()}|" class="product-image", style="width: 150px">-->
                             </td>
                             <td>
-                                <a th:text="${pinjam.getTanggal_mulai()}"></a>
+                                <a th:text="${pinjam.getTanggalMulai()}"></a>
                             </td>
                             <td>
-                                <a th:text="${pinjam.getTanggal_selesai()}"></a>
+                                <a th:text="${pinjam.getTanggalSelesai()}"></a>
                             </td>
                             <td>
                                 <a class="btn btn-primary btn-sm" th:href="@{terimaPeminjaman/{id}(id = ${pinjam.getId()})}">
