@@ -134,6 +134,20 @@ class ItemServiceImplTest {
         assertEquals(item.getProfilePic(), pastPic);
     }
 
+    @Test
+    void testUpdateStatusItemWhen1(){
+        when(itemRepository.getById("item-1")).thenReturn(item);
+        itemService.updateStatusItem("item-1",1);
+        assertEquals("tidak tersedia", item.getStatus());
+    }
+
+    @Test
+    void testUpdateStatusItemWhen2(){
+        when(itemRepository.getById("item-1")).thenReturn(item);
+        itemService.updateStatusItem("item-1",2);
+        assertEquals("tersedia", item.getStatus());
+    }
+
 
     @Test
     void testGetItemsMethod(){

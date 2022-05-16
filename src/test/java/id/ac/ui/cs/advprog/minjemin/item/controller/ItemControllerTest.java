@@ -2,8 +2,10 @@ package id.ac.ui.cs.advprog.minjemin.item.controller;
 
 import id.ac.ui.cs.advprog.minjemin.auth.service.MinjeminUserDetailsService;
 import id.ac.ui.cs.advprog.minjemin.auth.service.SecurityService;
+import id.ac.ui.cs.advprog.minjemin.auth.service.UserService;
 import id.ac.ui.cs.advprog.minjemin.item.model.Item;
 import id.ac.ui.cs.advprog.minjemin.item.service.ItemServiceImpl;
+import id.ac.ui.cs.advprog.minjemin.peminjaman.service.PeminjamanService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -37,6 +39,12 @@ class ItemControllerTest {
     @MockBean
     private ItemServiceImpl itemService;
 
+    @MockBean
+    private UserService userService;
+
+    @MockBean
+    private PeminjamanService peminjamanService;
+
     @BeforeEach
     void setUp() {
         item = Item.builder()
@@ -57,6 +65,15 @@ class ItemControllerTest {
                 .andExpect(handler().methodName("dashboardAdmin"))
                 .andExpect(model().attributeDoesNotExist())
                 .andExpect(view().name("admin/dashboard"));
+    }
+
+    @Test
+    void whenGetTabelPengajuanReturnStatus200() throws Exception {
+        mockMvc.perform(get("/admin/tabel-pengajuan"))
+                .andExpect(status().isOk())
+                .andExpect(handler().methodName("tabelPengajuan"))
+                .andExpect(model().attributeDoesNotExist())
+                .andExpect(view().name("admin/tabel_pengajuan"));
     }
 
     @Test
@@ -147,4 +164,25 @@ class ItemControllerTest {
                 .andExpect(model().attributeDoesNotExist())
                 .andExpect(redirectedUrl("/admin/"));
     }
+
+    @Test
+    void whenGetTerimaPinjamanShouldFound() throws Exception {
+        when(itemService.getItemById("9000")).thenReturn(item);
+        mockMvc.perform(get("/admin/tabel-pengajuan/terimaPeminjaman/9000"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(handler().methodName("terimaPinjam"))
+                .andExpect(model().attributeDoesNotExist())
+                .andExpect(redirectedUrl("/admin/tabel-pengajuan/"));
+    }
+
+    @Test
+    void whenGetTolakPinjamanShouldFound() throws Exception {
+        when(itemService.getItemById("9000")).thenReturn(item);
+        mockMvc.perform(get("/admin/tabel-pengajuan/tolakPeminjaman/9000"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(handler().methodName("tolakPinjam"))
+                .andExpect(model().attributeDoesNotExist())
+                .andExpect(redirectedUrl("/admin/tabel-pengajuan/"));
+    }
+
 }
