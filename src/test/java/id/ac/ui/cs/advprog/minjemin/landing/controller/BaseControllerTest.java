@@ -2,6 +2,8 @@ package id.ac.ui.cs.advprog.minjemin.landing.controller;
 
 import id.ac.ui.cs.advprog.minjemin.auth.service.MinjeminUserDetailsService;
 import id.ac.ui.cs.advprog.minjemin.auth.service.SecurityService;
+import id.ac.ui.cs.advprog.minjemin.item.model.Item;
+import id.ac.ui.cs.advprog.minjemin.item.model.ItemDTO;
 import id.ac.ui.cs.advprog.minjemin.item.service.ItemServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,6 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(controllers = BaseController.class)
 class BaseControllerTest {
 
+    ItemDTO item;
     @Autowired
     private MockMvc mockMvc;
 
@@ -33,7 +36,14 @@ class BaseControllerTest {
     private ItemServiceImpl itemService;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
+        item = ItemDTO.builder()
+                .name("scouter")
+                .desc("ini scouter")
+                .harga(9000)
+                .status("tersedia")
+                .build();
+        item.setId("item-1");
         Mockito.reset(securityService, minjeminUserDetailsService);
     }
 
@@ -46,6 +56,17 @@ class BaseControllerTest {
                 .andExpect(view().name("homepage"));
 
         verify(itemService, times(1)).getItems();
+    }
+
+    @Test
+    void whenGetItemDetailReturnStatus200() throws Exception {
+        when(itemService.getItemObject("9000")).thenReturn(item);
+
+        mockMvc.perform(get("/items/detail/9000"))
+                .andExpect(status().isOk())
+                .andExpect(handler().methodName("itemDetail"))
+                .andExpect(model().attributeDoesNotExist())
+                .andExpect(view().name("items/detail"));
     }
 
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -92,7 +93,7 @@ public class ItemServiceImpl implements ItemService {
         for (Item item: items) {
             byte[] profileByte = item.getProfilePic();
             String encode64 = imageProcessor.generateStringImage(profileByte);
-            var objectDTO = new ItemDTO(item.getId(), item.getName(), item.getDesc(), item.getHarga(), item.getStatus(), encode64);
+             var objectDTO = new ItemDTO(item.getId(), item.getName(), item.getDesc(), item.getHarga(), item.getStatus(), encode64);
             itemDTO.add(objectDTO);
         }
         return itemDTO;
@@ -104,4 +105,17 @@ public class ItemServiceImpl implements ItemService {
         itemRepository.delete(item);
 
     }
+    @Transactional
+    @Override
+    public ItemDTO getItemObject(String id) {
+        var imageProcessor = ImageProcessor.getInstance();
+        List<ItemDTO> itemDTOS = new ArrayList<>();
+        Item item = itemRepository.findItemById(id);
+        byte[] profileByte = item.getProfilePic();
+        String encode64 = imageProcessor.generateStringImage(profileByte);
+        ItemDTO itemDTO = new ItemDTO(item.getId(), item.getName(), item.getDesc(), item.getHarga(), item.getStatus(), encode64);
+        itemDTOS.add(itemDTO);
+        return itemDTO;
+    }
+
 }
