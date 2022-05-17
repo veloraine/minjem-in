@@ -13,4 +13,5 @@ public interface ItemService {
     void updateItem(String id, String name, String desc, int harga, MultipartFile file) throws IOException;
     void deleteItem(String id);
     List<ItemDTO> getItems();
+    ItemDTO getItemObject(String id);
 }
