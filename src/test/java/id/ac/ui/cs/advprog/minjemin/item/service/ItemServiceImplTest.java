@@ -181,13 +181,4 @@ class ItemServiceImplTest {
         assertNull(itemRepository.getById("0"));
     }
 
-    @Test
-    void testGetItemObjectMethod(){
-        List<Item> itemList = new ArrayList<>();
-        itemList.add(item);
-        when(itemRepository.findAll()).thenReturn(itemList);
-        lenient().when(itemService.getItemById("1")).thenReturn(item);
-        Item chosenItem = itemService.getItemById("1");
-        assertEquals(chosenItem.getId(), item.getId());
-    }
 }

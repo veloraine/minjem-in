@@ -37,11 +37,4 @@ class ItemServiceTest {
 
         assertTrue(Modifier.isAbstract(modifier));
     }
-
-    @Test
-    void testGetItemObjectMethod() throws NoSuchMethodException{
-        Method getItemObjectMethod = itemServiceClass.getDeclaredMethod("getItemObject", String.class);
-        int modifier = getItemObjectMethod.getModifiers();
-        assertTrue(Modifier.isAbstract(modifier));
-    }
 }
