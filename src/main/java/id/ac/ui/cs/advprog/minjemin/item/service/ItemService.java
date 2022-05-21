@@ -15,5 +15,4 @@ public interface ItemService {
     void deleteItem(String id);
     void updateStatusItem(String id, int code);
     List<ItemDTO> getItems();
-    ItemDTO getItemObject(String id);
 }
