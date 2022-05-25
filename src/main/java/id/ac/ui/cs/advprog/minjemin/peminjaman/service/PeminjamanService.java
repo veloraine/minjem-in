@@ -12,4 +12,6 @@ public interface PeminjamanService {
     void terimaPeminjaman(String id);
     Peminjaman getPeminjamanByItemId(String itemId);
     List<PeminjamanDTO> getAllPeminjaman();
+    List<Peminjaman> getAllPeminjamanByUserId(String userId);
+    String payPeminjaman(String id);
 }
