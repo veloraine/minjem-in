@@ -70,4 +70,16 @@ public class PeminjamanServiceImpl implements PeminjamanService{
         }
         return peminjamanDTO;
     }
+
+    @Override
+    public List<Peminjaman> getAllPeminjamanByUserId(String userId) {
+        return peminjamanRepository.findAllByUserId(userId);
+    }
+
+    @Override
+    public String payPeminjaman(String id) {
+        var peminjaman = peminjamanRepository.findPeminjamanById(id);
+        peminjaman.setStatusPembayaran("dibayar");
+        return "Status barang berhasil diubah";
+    }
 }

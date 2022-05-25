@@ -24,8 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.lenient;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class PeminjamanServiceImplTest {
@@ -34,6 +33,7 @@ class PeminjamanServiceImplTest {
     private User user;
     private Item item;
     private MinjeminUserDetails minjeminUserDetails;
+    private Peminjaman peminjamanDummy;
 
     @Mock
     PeminjamanRepository peminjamanRepository;
@@ -76,6 +76,10 @@ class PeminjamanServiceImplTest {
                 .profilePic("scouter".getBytes())
                 .build();
         item.setId("item-1");
+
+        peminjamanDummy = new Peminjaman("pinjam-1", "user-1", "item-1",
+                "2002-01-11", "2003-01-11", "menunggu persetujuan", "belum dibayar");
+        peminjamanDummy.setId("peminjaman-1");
 
     }
 
@@ -166,5 +170,25 @@ class PeminjamanServiceImplTest {
         when(peminjamanRepository.findPeminjamanById("pinjam-1")).thenReturn(pinjam1);
         peminjamanService.terimaPeminjaman("pinjam-1");
         assertEquals("Diterima", pinjam1.getStatus());
+    }
+
+    @Test
+    void testGetAllPeminjamanById(){
+
+        List<Peminjaman> peminjamanList = new ArrayList<>();
+        peminjamanList.add(peminjamanDummy);
+        when(peminjamanService.getAllPeminjamanByUserId("user-1")).thenReturn(peminjamanList);
+        var peminjaman = peminjamanService.getAllPeminjamanByUserId("user-1");
+        assertEquals(1, peminjaman.size());
+
+    }
+
+    @Test
+    void testPayPeminjaman() {
+
+        when(peminjamanRepository.findPeminjamanById("peminjaman-1")).thenReturn(peminjamanDummy);
+        var result = peminjamanService.payPeminjaman("peminjaman-1");
+        assertEquals("Status barang berhasil diubah", result);
+        assertEquals("dibayar", peminjamanDummy.getStatusPembayaran());
     }
 }
