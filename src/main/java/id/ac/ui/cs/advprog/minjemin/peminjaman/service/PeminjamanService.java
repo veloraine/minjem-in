@@ -2,6 +2,7 @@ package id.ac.ui.cs.advprog.minjemin.peminjaman.service;
 
 import id.ac.ui.cs.advprog.minjemin.peminjaman.model.Peminjaman;
 import id.ac.ui.cs.advprog.minjemin.peminjaman.model.PeminjamanDTO;
+import id.ac.ui.cs.advprog.minjemin.peminjaman.model.PeminjamanDetails;
 
 import java.util.List;
 
@@ -12,6 +13,6 @@ public interface PeminjamanService {
     void terimaPeminjaman(String id);
     Peminjaman getPeminjamanByItemId(String itemId);
     List<PeminjamanDTO> getAllPeminjaman();
-    List<Peminjaman> getAllPeminjamanByUserId(String userId);
+    List<PeminjamanDetails> getAllPeminjamanByUserId(String userId);
     String payPeminjaman(String id);
 }

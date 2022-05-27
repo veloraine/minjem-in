@@ -3,6 +3,7 @@ package id.ac.ui.cs.advprog.minjemin.api;
 import id.ac.ui.cs.advprog.minjemin.auth.service.MinjeminUserDetailsService;
 import id.ac.ui.cs.advprog.minjemin.auth.service.SecurityService;
 import id.ac.ui.cs.advprog.minjemin.peminjaman.model.Peminjaman;
+import id.ac.ui.cs.advprog.minjemin.peminjaman.model.PeminjamanDetails;
 import id.ac.ui.cs.advprog.minjemin.peminjaman.service.PeminjamanService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,11 +37,11 @@ class PeminjamanApiTest {
     @MockBean
     private PeminjamanService peminjamanService;
 
-    private Peminjaman peminjaman;
+    private PeminjamanDetails peminjaman;
 
     @BeforeEach
     void setUp(){
-        peminjaman = new Peminjaman(
+        peminjaman = new PeminjamanDetails(
                 "pinjam-1",
                 "user-1",
                 "item-1",
@@ -53,7 +54,7 @@ class PeminjamanApiTest {
 
     @Test
     void testGetAllPeminjamanByUserId() throws Exception{
-        List<Peminjaman> peminjamanList = new ArrayList<>();
+        List<PeminjamanDetails> peminjamanList = new ArrayList<>();
         peminjamanList.add(peminjaman);
 
         when(peminjamanService.getAllPeminjamanByUserId("user-1")).thenReturn(peminjamanList);
@@ -62,7 +63,7 @@ class PeminjamanApiTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$[0].id").value("peminjaman-1"))
                 .andExpect(jsonPath("$[0].userId").value("user-1"))
-                .andExpect(jsonPath("$[0].itemId").value("item-1"))
+                .andExpect(jsonPath("$[0].itemName").value("item-1"))
                 .andExpect(jsonPath("$[0].tanggalMulai").value("2002-01-11"))
                 .andExpect(jsonPath("$[0].tanggalSelesai").value("2003-01-11"))
                 .andExpect(jsonPath("$[0].status").value("menunggu persetujuan"))

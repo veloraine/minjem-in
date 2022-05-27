@@ -95,7 +95,7 @@ class UserControllerTest{
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("username", userDto.getUsername())
                 .param("password", userDto.getPassword())
-                .param("roles", userDto.getRoles().toString())
+                .param("roles", userDto.getRoles())
                 .sessionAttr("user", userDto));
     }
 
@@ -106,7 +106,7 @@ class UserControllerTest{
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("username", userDto.getUsername())
                 .param("password", userDto.getPassword())
-                .param("roles", userDto.getRoles().toString())
+                .param("roles", userDto.getRoles())
                 .sessionAttr("user", userDto));
     }
 
@@ -117,7 +117,7 @@ class UserControllerTest{
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("username", userDto.getUsername())
                 .param("password", userDto.getPassword())
-                .param("roles", userDto.getRoles().toString())
+                .param("roles", userDto.getRoles())
                 .sessionAttr("user", userDto));
     }
 }

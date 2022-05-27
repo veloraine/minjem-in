@@ -11,6 +11,7 @@ import id.ac.ui.cs.advprog.minjemin.item.repository.ItemRepository;
 import id.ac.ui.cs.advprog.minjemin.item.service.ItemService;
 import id.ac.ui.cs.advprog.minjemin.peminjaman.model.Peminjaman;
 import id.ac.ui.cs.advprog.minjemin.peminjaman.model.PeminjamanDTO;
+import id.ac.ui.cs.advprog.minjemin.peminjaman.model.PeminjamanDetails;
 import id.ac.ui.cs.advprog.minjemin.peminjaman.repository.PeminjamanRepository;
 import id.ac.ui.cs.advprog.minjemin.peminjaman.util.PeminjamanCreator;
 import org.junit.jupiter.api.BeforeEach;
@@ -177,7 +178,8 @@ class PeminjamanServiceImplTest {
 
         List<Peminjaman> peminjamanList = new ArrayList<>();
         peminjamanList.add(peminjamanDummy);
-        when(peminjamanService.getAllPeminjamanByUserId("user-1")).thenReturn(peminjamanList);
+        when(peminjamanRepository.findAllByUserId("user-1")).thenReturn(peminjamanList);
+        when(itemRepository.findItemById("item-1")).thenReturn(item);
         var peminjaman = peminjamanService.getAllPeminjamanByUserId("user-1");
         assertEquals(1, peminjaman.size());
 
@@ -185,10 +187,11 @@ class PeminjamanServiceImplTest {
 
     @Test
     void testPayPeminjaman() {
-
-        when(peminjamanRepository.findPeminjamanById("peminjaman-1")).thenReturn(peminjamanDummy);
+        Peminjaman peminjaman1 = new Peminjaman("pinjam-1", "user-1", "item-1",
+                "2002-01-01", "2003-01-01", "menunggu", "belum dibayar");
+        when(peminjamanRepository.findPeminjamanById("peminjaman-1")).thenReturn(peminjaman1);
         var result = peminjamanService.payPeminjaman("peminjaman-1");
         assertEquals("Status barang berhasil diubah", result);
-        assertEquals("dibayar", peminjamanDummy.getStatusPembayaran());
+        assertEquals("dibayar", peminjaman1.getStatusPembayaran());
     }
 }
