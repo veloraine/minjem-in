@@ -1,6 +1,7 @@
 package id.ac.ui.cs.advprog.minjemin.api;
 
 import id.ac.ui.cs.advprog.minjemin.peminjaman.model.Peminjaman;
+import id.ac.ui.cs.advprog.minjemin.peminjaman.model.PeminjamanDetails;
 import id.ac.ui.cs.advprog.minjemin.peminjaman.service.PeminjamanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ public class PeminjamanApi {
 
     @GetMapping(path = "/{id}", produces = {"application/json"})
     @ResponseBody
-    public ResponseEntity<Iterable<Peminjaman>> getPeminjaman(@PathVariable(value = "id") String id){
+    public ResponseEntity<Iterable<PeminjamanDetails>> getPeminjaman(@PathVariable(value = "id") String id){
         return ResponseEntity.ok(peminjamanService.getAllPeminjamanByUserId(id));
     }
 
