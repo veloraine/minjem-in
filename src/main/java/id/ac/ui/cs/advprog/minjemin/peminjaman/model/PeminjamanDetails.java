@@ -15,4 +15,5 @@ public class PeminjamanDetails {
     String tanggalSelesai;
     String status;
     String statusPembayaran;
+    int hargaBarang;
 }

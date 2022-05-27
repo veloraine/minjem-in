@@ -48,7 +48,8 @@ class PeminjamanApiTest {
                 "2002-01-11",
                 "2003-01-11",
                 "menunggu persetujuan",
-                "belum dibayar");
+                "belum dibayar",
+                5000);
         peminjaman.setId("peminjaman-1");
     }
 
@@ -67,7 +68,8 @@ class PeminjamanApiTest {
                 .andExpect(jsonPath("$[0].tanggalMulai").value("2002-01-11"))
                 .andExpect(jsonPath("$[0].tanggalSelesai").value("2003-01-11"))
                 .andExpect(jsonPath("$[0].status").value("menunggu persetujuan"))
-                .andExpect(jsonPath("$[0].statusPembayaran").value("belum dibayar"));
+                .andExpect(jsonPath("$[0].statusPembayaran").value("belum dibayar"))
+                .andExpect(jsonPath("$[0].hargaBarang").value("5000"));
 
         verify(peminjamanService, times((1))).getAllPeminjamanByUserId("user-1");
     }

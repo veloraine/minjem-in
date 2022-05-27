@@ -86,7 +86,8 @@ public class PeminjamanServiceImpl implements PeminjamanService{
                     p.getTanggalMulai(),
                     p.getTanggalSelesai(),
                     p.getStatus(),
-                    p.getStatusPembayaran()
+                    p.getStatusPembayaran(),
+                    item.getHarga()
             );
             peminjamanDetailsList.add(peminjamanDetails);
         }
