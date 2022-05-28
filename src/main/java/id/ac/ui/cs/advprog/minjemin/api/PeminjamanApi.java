@@ -1,6 +1,5 @@
 package id.ac.ui.cs.advprog.minjemin.api;
 
-import id.ac.ui.cs.advprog.minjemin.peminjaman.model.Peminjaman;
 import id.ac.ui.cs.advprog.minjemin.peminjaman.model.PeminjamanDetails;
 import id.ac.ui.cs.advprog.minjemin.peminjaman.service.PeminjamanService;
 import org.springframework.beans.factory.annotation.Autowired;
