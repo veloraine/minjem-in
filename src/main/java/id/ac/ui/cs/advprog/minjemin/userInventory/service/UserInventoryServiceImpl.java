@@ -47,7 +47,7 @@ public class UserInventoryServiceImpl implements UserInventoryService {
             byte[] profileByte = itemDipinjam.getProfilePic();
             String encode64 = imageProcessor.generateStringImage(profileByte);
 
-            // Fetch all the datas
+
             var nama = itemDipinjam.getName();
             var desc = itemDipinjam.getDesc();
             var tanggalMulai = item.getTanggalMulai();
@@ -59,15 +59,12 @@ public class UserInventoryServiceImpl implements UserInventoryService {
             var statusPembayaran = item.getStatusPembayaran();
             var statusPeminjaman = item.getStatus();
 
-            // Parse dates
-            var sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
             var calcTanggalMulai = tanggalMulai.substring(8, 10) + '/' +  tanggalMulai.substring(5, 7) + '/' + tanggalMulai.substring(0, 4);
+            var sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
             var parsedTanggalMulai = sdf.parse(calcTanggalMulai);
-            var calcTanggalSelesai = tanggalSelesai.substring(8, 10) + '/' +  tanggalSelesai.substring(5, 7) + '/' + tanggalSelesai.substring(0, 4);
-            var parsedTanggalSelesai = sdf.parse(calcTanggalSelesai);
+            var tanggalSekarang = new Date();
 
-            // Calculate difference
-            long diffInMillies = Math.abs(parsedTanggalSelesai.getTime() - parsedTanggalMulai.getTime());
+            long diffInMillies = Math.abs(tanggalSekarang.getTime() - parsedTanggalMulai.getTime());
             long durasi = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
             long biaya = durasi * itemDipinjam.getHarga();
 
