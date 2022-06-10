@@ -28,9 +28,10 @@ public class UserInventoryController {
 
         var userDetails = securityService.findLoggedInUserDetails();
         var username = userDetails.getUsername();
+        var user = userService.findByUsername(username);
         model.addAttribute("userInventories", userInventoryService.showUserInventory());
         model.addAttribute("sessionId", userDetails);
-        model.addAttribute("userId", userService.findByUsername(username));
+        model.addAttribute("userId", user.getId());
         return "user-inventory/show";
     }
 }

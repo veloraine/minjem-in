@@ -24,14 +24,12 @@
       <div class="col-md-15">
         <div class="w-50 my-5 p-3">
           <h1 class="title-header">User Inventory</h1>
+          <a class="btn btn-primary btn-sm p-2 m-3" th:href="@{https://minjem-in-payment-staging.herokuapp.com/{id}(id = ${userId})}">Bayar Tagihanku</a>
         </div>
       </div>
       <div class="col-md-10 mt-5">
-        <a class="btn btn-primary btn-sm" th:href="@{https://minjem-in-payment-staging.herokuapp.com/{id}(id = ${userId})">Bayar</a>
 
-        <!--Playlist Table-->
         <div th:if="${userInventories} != null">
-          <h4 class="text-left lh-lg">Halo, ingin minjem apa hari ini?</h4>
           <table id="example" class="table table-hover table-dark">
             <thead>
             <tr>
