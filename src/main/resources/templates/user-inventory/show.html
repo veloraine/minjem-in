@@ -62,7 +62,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="item : ${userInventories}" th:if="${item.getStatusPembayaran == 'belum dibayar'}">
+            <tr th:each="item : ${userInventories}">
               <td>
                 <img th:src="|data:image;base64,*{item.getBase64()}|" class="product-image", style="width: 150px">
               </td>

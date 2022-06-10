@@ -1,5 +1,6 @@
 package id.ac.ui.cs.advprog.minjemin.userInventory.controller;
 
+import id.ac.ui.cs.advprog.minjemin.auth.security.MinjeminUserDetails;
 import id.ac.ui.cs.advprog.minjemin.auth.service.SecurityService;
 import id.ac.ui.cs.advprog.minjemin.auth.service.UserService;
 import id.ac.ui.cs.advprog.minjemin.userInventory.service.UserInventoryService;
