@@ -1,6 +1,7 @@
 package id.ac.ui.cs.advprog.minjemin.userInventory.controller;
 
 import id.ac.ui.cs.advprog.minjemin.auth.service.SecurityService;
+import id.ac.ui.cs.advprog.minjemin.auth.service.UserService;
 import id.ac.ui.cs.advprog.minjemin.userInventory.service.UserInventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,10 +18,18 @@ public class UserInventoryController {
     @Autowired
     SecurityService securityService;
 
+    @Autowired
+    UserService userService;
+
+
     @GetMapping(path="/user-inventory")
     public String showUserInventory(Model model) throws ParseException {
+
+        var userDetails = securityService.findLoggedInUserDetails();
+        var username = userDetails.getUsername();
         model.addAttribute("userInventories", userInventoryService.showUserInventory());
-        model.addAttribute("sessionId", securityService.findLoggedInUserDetails());
+        model.addAttribute("sessionId", userDetails);
+        model.addAttribute("userId", userService.findByUsername(username));
         return "user-inventory/show";
     }
 }

@@ -5,10 +5,12 @@ import id.ac.ui.cs.advprog.minjemin.auth.model.UserDTO;
 import id.ac.ui.cs.advprog.minjemin.auth.security.MinjeminUserDetails;
 import id.ac.ui.cs.advprog.minjemin.auth.service.MinjeminUserDetailsService;
 import id.ac.ui.cs.advprog.minjemin.auth.service.SecurityService;
+import id.ac.ui.cs.advprog.minjemin.auth.service.UserService;
 import id.ac.ui.cs.advprog.minjemin.userInventory.service.UserInventoryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -33,10 +35,13 @@ public class UserInventoryControllerTest {
     private MinjeminUserDetailsService minjeminUserDetailsService;
 
     @MockBean
-    UserInventoryService userInventoryService;
+    private UserInventoryService userInventoryService;
 
     @MockBean
     private SecurityService securityService;
+
+    @MockBean
+    private UserService userService;
 
     @BeforeEach
     void setUp() {
@@ -52,6 +57,8 @@ public class UserInventoryControllerTest {
 
     @Test
     void whenGetUserInventoryReturnStatus200() throws Exception {
+        when(securityService.findLoggedInUserDetails()).thenReturn(minjeminUserDetails);
+        when(userService.findByUsername("blax")).thenReturn(user);
         mockMvc.perform(get("/user-inventory"))
                 .andExpect(status().isOk())
                 .andExpect(handler().methodName("showUserInventory"))
