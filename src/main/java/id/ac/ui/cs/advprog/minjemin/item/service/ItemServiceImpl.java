@@ -109,12 +109,10 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public ItemDTO getItemObject(String id) {
         var imageProcessor = ImageProcessor.getInstance();
-        List<ItemDTO> itemDTOS = new ArrayList<>();
         Item item = itemRepository.findItemById(id);
         byte[] profileByte = item.getProfilePic();
         String encode64 = imageProcessor.generateStringImage(profileByte);
         ItemDTO itemDTO = new ItemDTO(item.getId(), item.getName(), item.getDesc(), item.getHarga(), item.getStatus(), encode64);
-        itemDTOS.add(itemDTO);
         return itemDTO;
     }
 }
