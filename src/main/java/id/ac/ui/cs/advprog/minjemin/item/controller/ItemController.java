@@ -91,17 +91,4 @@ public class ItemController {
         itemService.deleteItem(id);
         return REDIRECT;
     }
-
-    @GetMapping(path = "/tabel-pengajuan/terimaPeminjaman/{id}")
-    public String terimaPinjam(@PathVariable(value = "id") String id, Model model) {
-        peminjamanService.terimaPeminjaman(id);
-        return "redirect:/admin/tabel-pengajuan/";
-    }
-
-    @GetMapping(path = "/tabel-pengajuan/tolakPeminjaman/{id}")
-    public String tolakPinjam(@PathVariable(value = "id") String id, Model model) {
-        peminjamanService.tolakPeminjaman(id);
-        return "redirect:/admin/tabel-pengajuan/";
-    }
-
 }

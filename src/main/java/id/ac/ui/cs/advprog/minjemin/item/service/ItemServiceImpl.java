@@ -4,6 +4,8 @@ import id.ac.ui.cs.advprog.minjemin.item.model.Item;
 import id.ac.ui.cs.advprog.minjemin.item.repository.ItemRepository;
 import id.ac.ui.cs.advprog.minjemin.item.model.ItemDTO;
 import id.ac.ui.cs.advprog.minjemin.item.util.ImageProcessor;
+import id.ac.ui.cs.advprog.minjemin.peminjaman.model.Peminjaman;
+import id.ac.ui.cs.advprog.minjemin.peminjaman.repository.PeminjamanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +19,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     ItemRepository itemRepository;
+
+    @Autowired
+    PeminjamanRepository peminjamanRepository;
 
     @Override
     public Item getItemById(String id) {
@@ -102,6 +107,9 @@ public class ItemServiceImpl implements ItemService {
     public void deleteItem(String id) {
         var item = itemRepository.getById(id);
         itemRepository.delete(item);
-
+        List<Peminjaman> peminjaman = peminjamanRepository.findAllByItemId(id);
+        for (Peminjaman i : peminjaman) {
+            peminjamanRepository.delete(i);
+        }
     }
 }

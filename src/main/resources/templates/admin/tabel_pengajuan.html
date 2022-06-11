@@ -57,7 +57,7 @@
                                 <a th:text="${itemService.getItemById(pinjam.getItemId()).getName()}"></a>
                             </td>
                             <td>
-<!--                                <img th:src="|data:image;base64,*{itemService.getItemDTOById(pinjam.getItem_id()).getBase64Image()}|" class="product-image", style="width: 150px">-->
+                                <img th:src="|data:image;base64,*{itemService.getItemDTOById(pinjam.getItemId()).getBase64Image()}|" class="product-image", style="width: 150px">
                             </td>
                             <td>
                                 <a th:text="${pinjam.getTanggalMulai()}"></a>
@@ -66,9 +66,9 @@
                                 <a th:text="${pinjam.getTanggalSelesai()}"></a>
                             </td>
                             <td>
-                                <a class="btn btn-primary btn-sm" th:href="@{terimaPeminjaman/{id}(id = ${pinjam.getId()})}">
+                                <a class="btn btn-primary btn-sm" th:href="@{/../../peminjaman/terima/{id}(id = ${pinjam.getId()})}">
                                     Terima</a>
-                                <a class="btn btn-primary btn-sm" th:href="@{tolakPeminjaman/{id}(id = ${pinjam.getId()})}">
+                                <a class="btn btn-primary btn-sm" th:href="@{/../../peminjaman/tolak/{id}(id = ${pinjam.getId()})}">
                                     Tolak</a>
                             </td>
                         </tr>

@@ -82,7 +82,7 @@
                                 <a class="btn btn-primary btn-sm"
                                 th:href="@{update/{id}(id = ${item.getId()})}">
                                     Update</a>
-                                <a class="btn btn-primary btn-sm"
+                                <a th:if="${item.getStatus()} == 'tersedia'" class="btn btn-primary btn-sm"
                                 th:href="@{delete/{id}(id = ${item.getId()})}">
                                     Delete</a>
                             </td>

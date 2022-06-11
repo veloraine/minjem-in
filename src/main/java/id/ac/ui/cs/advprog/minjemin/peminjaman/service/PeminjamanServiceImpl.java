@@ -56,6 +56,13 @@ public class PeminjamanServiceImpl implements PeminjamanService{
     }
 
     @Override
+    public void batalkanPeminjaman(String id) {
+        var pinjam = peminjamanRepository.findPeminjamanById(id);
+        pinjam.setStatus("Dibatalkan");
+        itemService.updateStatusItem(pinjam.getItemId(), 2);
+    }
+
+    @Override
     public Peminjaman getPeminjamanByItemId(String itemId){
         return peminjamanRepository.findPeminjamanByUserId(itemId);
     }
