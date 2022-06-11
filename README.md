@@ -3,7 +3,9 @@
 Minjem.in adalah platform pinjam meminjam barang untuk memenuhi kebutuhan mahasiswa dalam memenuhi kebutuhan kegiatan perkuliahan. Butuh barang tetapi takut tidak digunakan lagi dalam jangka panjang? Minjem.in aja!
 
 ## Link Website (Master)
-[minjem-in.herokuapp.com](https://minjem-in.herokuapp.com/)
+Main website: [minjem-in.herokuapp.com](https://minjem-in.herokuapp.com/)
+
+Microservice: [minjem-in-payment.herokuapp.com](https://minjem-in-payment.herokuapp.com/)
 
 ## Status Branch Master
 [![pipeline status](https://gitlab.cs.ui.ac.id/AdvProg/reguler-2022/student/kelas-b/2006525330-Ridjky-Tegar-Perkasa/minjem-in/minjem-in/badges/master/pipeline.svg)](https://gitlab.cs.ui.ac.id/AdvProg/reguler-2022/student/kelas-b/2006525330-Ridjky-Tegar-Perkasa/minjem-in/minjem-in/-/commits/master)
@@ -24,19 +26,19 @@ Minjem.in adalah platform pinjam meminjam barang untuk memenuhi kebutuhan mahasi
 4. 2006527550 - Stephanus Dario
 
 ## Link Website (Staging)
-[minjem-in-staging.herokuapp.com](https://minjem-in-staging.herokuapp.com/)
+Main website: [minjem-in-staging.herokuapp.com](https://minjem-in-staging.herokuapp.com/)
 
-### What's new
-1. Laman pengajuan peminjaman (oleh Brandon)
-   - Pengguna dapat melakukan pengecekan ulang permintaan peminjaman yang telah Ia lakukan. Laman ini berisi rincian dari peminjaman yang akan Ia lakukan dan tombol "Ajukan Peminjaman" yang akan melakukan aksi pengajuan peminjaman. Pengajuan ini dapat diterima ataupun ditolak oleh Admin.
+Microservice: [minjem-in-payment-staging.herokuapp.com](https://minjem-in-payment-staging.herokuapp.com/)
 
-2. Halaman daftar pengajuan peminjaman untuk admin (oleh Zaki)
-   - Pada halaman ini, Admin dapat melihat seluruh daftar pengajuan pinjaman yang masih berstatus menunggu persetujuan. Halaman ini berisi tabel data peminjaman dengan beberapa informasi terkait peminjaman. Pada halaman ini terdapat tombol aksi untuk menolak atau menerima pengajuan peminjaman.
+### What's new (Version 1.3)
+1. Api untuk Payment dan Topup (oleh Brandon)
 
-3. Tolak atau terima pengajuan peminjaman (oleh Zaki)
-   - Admin dapat menolak atau menerima pengajuan peminjaman melalui halaman yang telah disebutkan pada poin sebelumnya.  
+   - Api berkaitan dengan microservices pembayaran (lebih lanjut lihat repository microservice)
+   - Pengguna dapat mengisi nominal saldo yang akan ditambahkan kepada akun pengguna dan saldo akun pengguna akan bertambah sesuai nominal yang diisi
+   - Pengguna dapat melakukan pembayaran untuk produk yang ingin dipinjam dan saldo pengguna berkurang sejumlah harga peminjaman barang.
 
-
+  
+   
 
     
 

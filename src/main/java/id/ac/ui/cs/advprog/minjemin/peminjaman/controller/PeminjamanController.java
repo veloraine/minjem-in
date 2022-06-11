@@ -34,6 +34,7 @@ public class PeminjamanController {
         }
         model.addAttribute("user", userService.findByUsername(user.getUsername()));
         model.addAttribute("item", itemService.getItemById(id));
+        model.addAttribute("sessionId", securityService.findLoggedInUserDetails());
         return "peminjaman/pinjam";
     }
 
@@ -44,6 +45,7 @@ public class PeminjamanController {
 
         var result = peminjamanService.createPeminjaman(id, tanggalMulai, tanggalSelesai);
         model.addAttribute("result", result);
+        model.addAttribute("sessionId", securityService.findLoggedInUserDetails());
         return "peminjaman/result";
     }
 }

@@ -6,6 +6,7 @@ import id.ac.ui.cs.advprog.minjemin.item.repository.ItemRepository;
 import id.ac.ui.cs.advprog.minjemin.item.service.ItemService;
 import id.ac.ui.cs.advprog.minjemin.peminjaman.model.Peminjaman;
 import id.ac.ui.cs.advprog.minjemin.peminjaman.model.PeminjamanDTO;
+import id.ac.ui.cs.advprog.minjemin.peminjaman.model.PeminjamanDetails;
 import id.ac.ui.cs.advprog.minjemin.peminjaman.repository.PeminjamanRepository;
 import id.ac.ui.cs.advprog.minjemin.peminjaman.util.PeminjamanCreator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,5 +70,34 @@ public class PeminjamanServiceImpl implements PeminjamanService{
             peminjamanDTO.add(objectDTO);
         }
         return peminjamanDTO;
+    }
+
+    @Override
+    public List<PeminjamanDetails> getAllPeminjamanByUserId(String userId) {
+        List<Peminjaman> tempPeminjaman = peminjamanRepository.findAllByUserId(userId);
+        List<PeminjamanDetails> peminjamanDetailsList = new ArrayList<>();
+        for (Peminjaman p: tempPeminjaman) {
+            var item = itemRepository.findItemById(p.getItemId());
+
+            var peminjamanDetails = new PeminjamanDetails(
+                    p.getId(),
+                    p.getUserId(),
+                    item.getName(),
+                    p.getTanggalMulai(),
+                    p.getTanggalSelesai(),
+                    p.getStatus(),
+                    p.getStatusPembayaran(),
+                    item.getHarga()
+            );
+            peminjamanDetailsList.add(peminjamanDetails);
+        }
+        return peminjamanDetailsList;
+    }
+
+    @Override
+    public String payPeminjaman(String id) {
+        var peminjaman = peminjamanRepository.findPeminjamanById(id);
+        peminjaman.setStatusPembayaran("dibayar");
+        return "Status barang berhasil diubah";
     }
 }

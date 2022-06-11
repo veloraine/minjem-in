@@ -14,7 +14,11 @@
 </head>
 
 <body>
-<nav th:insert="navbar" />
+<div th:switch="${sessionId != null}">
+    <nav th:case="${true}" th:insert="fragments/navbar_with_logout" />
+    <nav th:case="*" th:insert="fragments/navbar_with_login"/>
+</div>
+
 <div class="my-4 d-flex justify-content-center">
     <div class="container">
         <div class="row justify-content-md-center">

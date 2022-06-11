@@ -1,5 +1,6 @@
 package id.ac.ui.cs.advprog.minjemin.item.controller;
 
+import id.ac.ui.cs.advprog.minjemin.auth.service.SecurityService;
 import id.ac.ui.cs.advprog.minjemin.auth.service.UserService;
 import id.ac.ui.cs.advprog.minjemin.item.service.ItemService;
 import id.ac.ui.cs.advprog.minjemin.peminjaman.service.PeminjamanService;
@@ -19,6 +20,9 @@ public class ItemController {
     ItemService itemService;
 
     @Autowired
+    SecurityService securityService;
+
+    @Autowired
     PeminjamanService peminjamanService;
 
     @Autowired
@@ -27,6 +31,7 @@ public class ItemController {
     @GetMapping(path = "/")
     public String dashboardAdmin(Model model) {
         model.addAttribute("items", itemService.getItems());
+        model.addAttribute("sessionId", securityService.findLoggedInUserDetails());
         return "admin/dashboard";
     }
 
@@ -35,11 +40,13 @@ public class ItemController {
         model.addAttribute("peminjaman", peminjamanService.getAllPeminjaman());
         model.addAttribute("itemService", itemService);
         model.addAttribute("userService", userService);
+        model.addAttribute("sessionId", securityService.findLoggedInUserDetails());
         return "admin/tabel_pengajuan";
     }
 
     @GetMapping(value = "/create")
     public String createItem(Model model) {
+        model.addAttribute("sessionId", securityService.findLoggedInUserDetails());
         return "items/add_item";
     }
 
@@ -51,8 +58,7 @@ public class ItemController {
                              @RequestParam(value = "file") MultipartFile file) {
         try {
             itemService.createItem(name, desc, harga, file);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return REDIRECT;
         }
         return REDIRECT;
@@ -61,6 +67,7 @@ public class ItemController {
     @GetMapping(path = "/update/{id}")
     public String updateItem(@PathVariable(value = "id") String id, Model model) {
         model.addAttribute("item", itemService.getItemById(id));
+        model.addAttribute("sessionId", securityService.findLoggedInUserDetails());
         return "items/update";
     }
 
@@ -73,8 +80,7 @@ public class ItemController {
         try {
             itemService.updateItem(id, name, desc, harga, file);
 
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return REDIRECT;
         }
         return REDIRECT;
