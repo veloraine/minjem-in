@@ -76,7 +76,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public void updateStatusItem(String id, int code) {
-        Item item = itemRepository.getById(id);
+        var item = itemRepository.getById(id);
         if (code == 1) {
             item.setStatus("tidak tersedia");
         } else if (code == 2) {
@@ -91,7 +91,7 @@ public class ItemServiceImpl implements ItemService {
         List<ItemDTO> itemDTO = new ArrayList<>();
         for (Item item: items) {
             byte[] profileByte = item.getProfilePic();
-            String encode64 = imageProcessor.generateStringImage(profileByte);
+            var encode64 = imageProcessor.generateStringImage(profileByte);
             var objectDTO = new ItemDTO(item.getId(), item.getName(), item.getDesc(), item.getHarga(), item.getStatus(), encode64);
             itemDTO.add(objectDTO);
         }
