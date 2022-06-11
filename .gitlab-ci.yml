@@ -2,6 +2,16 @@ image: gradle:7.4-jdk11-alpine
 
 variables:
   GRADLE_OPTS: '-Dorg.gradle.daemon=false'
+#  POSTGRES_ENABLED: "false"
+#  DISABLE_SPRING_DATASOURCE_URL: "true"
+  DATABASE_URL: jdbc:postgresql://postgres:5432/postgres
+  POSTGRES_USER: postgres
+  POSTGRES_DB: postgres
+  POSTGRES_PASSWORD: postgres
+  SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres
+  SPRING_DATASOURCE_USER: postgres
+  SPRING_DATASOURCE_PASSWORD: postgres
+
 
 before_script:
   - echo "Semoga hasil code yang di push akan berlajan dengan baik dan lancar."
@@ -12,17 +22,52 @@ before_script:
   - rm -fr .gradle/caches/*/plugin-resolution/
 
 stages:
+  - build
+  - test
   - deploy
+
+build:
+  stage: build
+  script:
+    - gradle assemble
+  only:
+    - staging
+
+sonarqube-check:
+  stage: test
+  image: gradle:alpine
+  variables:
+    SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
+    GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
+  cache:
+    key: "${CI_JOB_NAME}"
+    paths:
+      - .sonar/cache
+  script:
+    - gradle check
+    - gradle jacocoTestReport
+    - gradle sonarqube -Dsonar.projectKey=$SONAR_PROJECT_KEY -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_TOKEN -Dsonar.qualitygate.wait=true
+    - grep -Eo "Total.*?([0-9]{1,3})%" ./build/reports/jacoco/test/html/index.html
+  services:
+    - "postgres:latest"
+
+  allow_failure: true
+  only:
+    - staging
+  artifacts:
+    when: always
+    paths:
+      - ./build/reports/jacoco/test/html/*
 
 deploy:
   stage: deploy
   only:
-    - master
+    - staging
   image: ruby:latest
   before_script:
     - gem install dpl
     - wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
   script:
-    - dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_API_KEY
+    - dpl --provider=heroku --app=$HEROKU_APP_NAME_STAGING --api-key=$HEROKU_API_KEY
     - export HEROKU_API_KEY=$HEROKU_API_KEY
-    - heroku run --app $HEROKU_APP_NAME migrate
+    - heroku run --app $HEROKU_APP_NAME_STAGING migrate
