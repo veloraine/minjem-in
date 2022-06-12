@@ -60,7 +60,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="item : ${userInventories}" th:if="${item.getStatusPembayaran == 'belum dibayar'}">
+
+            <tr th:each="item : ${userInventories}" th:id="${item.getNama()}">
               <td>
                 <img th:src="|data:image;base64,*{item.getBase64()}|" class="product-image", style="width: 150px">
               </td>
@@ -85,8 +86,9 @@
               <td>
                 <a class="btn btn-primary btn-sm" th:href="@{/../../peminjaman/batal/{id}(id = ${item.getPeminjamanId()})}" th:if="${item.getStatusPeminjaman() == 'menunggu persetujuan'}">
                   Batal</a>
-                <a class="btn btn-primary btn-sm" th:if="${item.getStatusPeminjaman() == 'sedang dipinjam'}">
-                  Perpanjang</a>
+                <form th:action="@{pengembalian/kembali/{id}(id = ${item.getPeminjamanId()})}" class="my-8" method="post">
+                  <button type="submit" class="btn btn-primary btn-sm" th:if="${item.getStatusPeminjaman() == 'Diterima'}">Kembalikan</button>
+                </form>
               </td>
             </tr>
             </tbody>

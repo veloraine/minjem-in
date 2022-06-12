@@ -10,6 +10,7 @@
             font-weight: bold;
         }
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 <nav th:fragment="navbar_with_logout" class="navbar navbar-light navbar-color">
@@ -26,8 +27,37 @@
                     <button class="btn btn-warning">User Inventory</button>
                 </form>
             </div>
+            <div class = "p-2">
+                <div class="dropdown">
+                    <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        Notifikasi
+                    </button>
+                    <ul id= "notifikasi" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="#"></a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </nav>
+<script>
+    $.ajax({
+        url: "/notifikasi",
+        success: function(peminjaman){
+            console.log(peminjaman);
+            peminjaman.map((p, index) => {
+                $("#notifikasi").append(`
+                <a class="text-decoration-none text-dark" key=${index} href="/user-inventory#${p.namaBarang}">
+                <div class="card">
+                  <div class="card-body">
+                    <p><span class="fw-bold">${p.namaBarang}</span></p>
+                    <p>Waktumu tinggal <span class="text-danger">${p.durasi}</span> hari lagi</p>
+                  </div>
+                </div>
+                </a>`)
+            })
+        }
+    });
+</script>
 </body>
 </html>

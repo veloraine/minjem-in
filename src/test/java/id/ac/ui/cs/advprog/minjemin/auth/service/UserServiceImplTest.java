@@ -1,5 +1,6 @@
 package id.ac.ui.cs.advprog.minjemin.auth.service;
 
+import id.ac.ui.cs.advprog.minjemin.auth.exception.BaseException;
 import id.ac.ui.cs.advprog.minjemin.auth.exception.UnmatchPasswordException;
 import id.ac.ui.cs.advprog.minjemin.auth.exception.UserAlreadyExistException;
 import id.ac.ui.cs.advprog.minjemin.auth.exception.WhitespaceValueException;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -91,6 +93,12 @@ class UserServiceImplTest {
         userDto.setPassword("ab");
         userDto.setPasswordConfirm("abcd");
         assertThrows(UnmatchPasswordException.class, () -> userService.validate(userDto));
+
+        try{
+            userService.validate(userDto);
+        }catch (BaseException e){
+            assertEquals(HttpStatus.BAD_REQUEST, e.getStatus());
+        }
     }
 
     @Test

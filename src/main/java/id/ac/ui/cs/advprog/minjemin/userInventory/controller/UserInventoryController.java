@@ -23,14 +23,17 @@ public class UserInventoryController {
 
 
     @GetMapping(path="/user-inventory")
-    public String showUserInventory(Model model) throws ParseException {
-
-        var userDetails = securityService.findLoggedInUserDetails();
-        var username = userDetails.getUsername();
-        var user = userService.findByUsername(username);
-        model.addAttribute("userInventories", userInventoryService.showUserInventory());
-        model.addAttribute("sessionId", userDetails);
-        model.addAttribute("userId", user.getId());
+    public String showUserInventory(Model model){
+        try {
+            var userDetails = securityService.findLoggedInUserDetails();
+            var username = userDetails.getUsername();
+            var user = userService.findByUsername(username);
+            var userInventory = userInventoryService.showUserInventory();
+            model.addAttribute("userInventories", userInventory);
+            model.addAttribute("sessionId", userDetails);
+            model.addAttribute("userId", user.getId());
+        } catch (ParseException e) {
+        }
         return "user-inventory/show";
     }
 }

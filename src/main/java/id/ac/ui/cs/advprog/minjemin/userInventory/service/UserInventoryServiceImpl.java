@@ -1,5 +1,6 @@
 package id.ac.ui.cs.advprog.minjemin.userInventory.service;
 
+import id.ac.ui.cs.advprog.minjemin.auth.model.User;
 import id.ac.ui.cs.advprog.minjemin.auth.repository.UserRepository;
 import id.ac.ui.cs.advprog.minjemin.auth.service.SecurityService;
 import id.ac.ui.cs.advprog.minjemin.item.model.Item;
@@ -19,6 +20,8 @@ import java.util.concurrent.TimeUnit;
 
 @Service
 public class UserInventoryServiceImpl implements UserInventoryService {
+    private User userLogin;
+
     @Autowired
     SecurityService securityService;
 
@@ -35,7 +38,10 @@ public class UserInventoryServiceImpl implements UserInventoryService {
     @Transactional
     public List<UserInventoryDTO> showUserInventory() throws ParseException {
         var usernamePengguna = securityService.findLoggedInUserDetails().getUsername();
-        var userLogin = userRepository.findByUsername(usernamePengguna).get();
+        var userLoginOptional = userRepository.findByUsername(usernamePengguna);
+        if (userLoginOptional.isPresent()) {
+            userLogin = userLoginOptional.get();
+        }
         var idPengguna = userLogin.getId();
 
         List<UserInventoryDTO> userInventories = new ArrayList<>();
@@ -43,9 +49,9 @@ public class UserInventoryServiceImpl implements UserInventoryService {
 
         List<Peminjaman> userInventory = peminjamanRepository.findAllByUserId(idPengguna);
         for (Peminjaman item : userInventory) {
-            Item itemDipinjam = itemRepository.findItemById(item.getItemId());
+            var itemDipinjam = itemRepository.findItemById(item.getItemId());
             byte[] profileByte = itemDipinjam.getProfilePic();
-            String encode64 = imageProcessor.generateStringImage(profileByte);
+            var encode64 = imageProcessor.generateStringImage(profileByte);
 
 
             var nama = itemDipinjam.getName();
@@ -62,9 +68,10 @@ public class UserInventoryServiceImpl implements UserInventoryService {
             var calcTanggalMulai = tanggalMulai.substring(8, 10) + '/' +  tanggalMulai.substring(5, 7) + '/' + tanggalMulai.substring(0, 4);
             var sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
             var parsedTanggalMulai = sdf.parse(calcTanggalMulai);
-            var tanggalSekarang = new Date();
+            var calcTanggalSelesai = tanggalSelesai.substring(8, 10) + '/' +  tanggalSelesai.substring(5, 7) + '/' + tanggalSelesai.substring(0, 4);
+            var parsedTanggalSelesai = sdf.parse(calcTanggalSelesai);
 
-            long diffInMillies = Math.abs(tanggalSekarang.getTime() - parsedTanggalMulai.getTime());
+            long diffInMillies = Math.abs(parsedTanggalSelesai.getTime() - parsedTanggalMulai.getTime());
             long durasi = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
             long biaya = durasi * itemDipinjam.getHarga();
 
