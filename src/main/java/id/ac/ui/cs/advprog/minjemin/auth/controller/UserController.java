@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping(path = "/auth")
 public class UserController {
-    private final String MESSAGE = "message";
+    private static final String MESSAGE = "message";
     @Autowired
     private UserService userService;
 
