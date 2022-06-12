@@ -13,4 +13,5 @@ public interface PeminjamanRepository extends JpaRepository<Peminjaman, String> 
     Peminjaman findPeminjamanByItemId(String id);
     List<Peminjaman> findAllByUserId(String id);
     List<Peminjaman> findAllByItemId(String id);
+    void deletePeminjamanById(String id);
 }

@@ -11,7 +11,7 @@ import java.lang.reflect.Modifier;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockitoExtension.class)
-class UserInventoryTest {
+class UserInventoryServiceTest {
     private Class<?> userInventoryServiceClass;
 
     @BeforeEach
@@ -20,8 +20,9 @@ class UserInventoryTest {
     }
 
     @Test
-    void testGetUserInventoryMethod() throws NoSuchMethodException{
-        Method showUserInventoryMethod = userInventoryServiceClass.getMethod("showUserInventory");
+    void testShowUserInventoryService() throws NoSuchMethodException {
+        Method showUserInventoryMethod = userInventoryServiceClass.getDeclaredMethod(
+                "showUserInventory");
         int modifier = showUserInventoryMethod.getModifiers();
 
         assertTrue(Modifier.isAbstract(modifier));
