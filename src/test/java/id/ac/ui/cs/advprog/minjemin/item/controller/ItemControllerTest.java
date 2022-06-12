@@ -164,25 +164,4 @@ class ItemControllerTest {
                 .andExpect(model().attributeDoesNotExist())
                 .andExpect(redirectedUrl("/admin/"));
     }
-
-    @Test
-    void whenGetTerimaPinjamanShouldFound() throws Exception {
-        when(itemService.getItemById("9000")).thenReturn(item);
-        mockMvc.perform(get("/admin/tabel-pengajuan/terimaPeminjaman/9000"))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(handler().methodName("terimaPinjam"))
-                .andExpect(model().attributeDoesNotExist())
-                .andExpect(redirectedUrl("/admin/tabel-pengajuan/"));
-    }
-
-    @Test
-    void whenGetTolakPinjamanShouldFound() throws Exception {
-        when(itemService.getItemById("9000")).thenReturn(item);
-        mockMvc.perform(get("/admin/tabel-pengajuan/tolakPeminjaman/9000"))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(handler().methodName("tolakPinjam"))
-                .andExpect(model().attributeDoesNotExist())
-                .andExpect(redirectedUrl("/admin/tabel-pengajuan/"));
-    }
-
 }

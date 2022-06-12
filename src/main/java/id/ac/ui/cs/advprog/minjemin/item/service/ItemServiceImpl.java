@@ -84,7 +84,7 @@ public class ItemServiceImpl implements ItemService {
         var item = itemRepository.getById(id);
         if (code == 1) {
             item.setStatus("tidak tersedia");
-        } else if (code == 2) {
+        } else {
             item.setStatus("tersedia");
         }
     }

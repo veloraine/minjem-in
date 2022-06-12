@@ -7,6 +7,9 @@ import id.ac.ui.cs.advprog.minjemin.peminjaman.model.Peminjaman;
 import id.ac.ui.cs.advprog.minjemin.peminjaman.repository.PeminjamanRepository;
 
 public class PeminjamanCreator {
+
+    private static final String STATUSMENUNGGU = "menunggu persetujuan";
+
     private static PeminjamanCreator peminjamanCreator;
 
     private PeminjamanCreator(){}
@@ -41,7 +44,7 @@ public class PeminjamanCreator {
                 .itemId(itemId)
                 .tanggalMulai(tanggalMulai)
                 .tanggalSelesai(tanggalSelesai)
-                .status("menunggu persetujuan")
+                .status(STATUSMENUNGGU)
                 .statusPembayaran("belum dibayar");
         var peminjaman = peminjamanValues.build();
 
@@ -59,10 +62,10 @@ public class PeminjamanCreator {
     public String updateItemStatus(String itemId, ItemRepository itemRepository) {
         var item = itemRepository.getById(itemId);
         var itemStatus = item.getStatus();
-        if (itemStatus.equals("tidak tersedia") || itemStatus.equals("menunggu persetujuan")) {
+        if (itemStatus.equals("tidak tersedia") || itemStatus.equals(STATUSMENUNGGU)) {
             return "Status barang sudah tidak tersedia";
         }
-        item.setStatus("menunggu persetujuan");
+        item.setStatus(STATUSMENUNGGU);
         return "Status barang berhasil diupdate";
     }
     public boolean cekTanggal(String tanggalMulai, String tanggalSelesai) {

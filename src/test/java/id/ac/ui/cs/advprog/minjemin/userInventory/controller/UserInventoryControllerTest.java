@@ -23,7 +23,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @AutoConfigureMockMvc(addFilters = false)
 @WebMvcTest(controllers = UserInventoryController.class)
-public class UserInventoryControllerTest {
+class UserInventoryControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
