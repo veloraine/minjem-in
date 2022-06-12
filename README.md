@@ -36,6 +36,9 @@ Microservice: [minjem-in-payment-staging.herokuapp.com](https://minjem-in-paymen
    - Api berkaitan dengan microservices pembayaran (lebih lanjut lihat repository microservice)
    - Pengguna dapat mengisi nominal saldo yang akan ditambahkan kepada akun pengguna dan saldo akun pengguna akan bertambah sesuai nominal yang diisi
    - Pengguna dapat melakukan pembayaran untuk produk yang ingin dipinjam dan saldo pengguna berkurang sejumlah harga peminjaman barang.
+2. Pembatalan peminjaman untuk user (oleh Zaki)
+   - Pengguna dapat membatalkan permintaan peminjaman produk yang statusnya masih menunggu persetujuan admin
+
 2. Notifikasi Tenggat Peminjaman (oleh Ricky)
    - Notifikasi ini merupakan fitur yang diimplementasikan pada navbar pengguna.
    - Implementasi fitur ini berupa button yang dapat diklik dan berisi peminjaman-peminjaman pengguna yang berdurasi < 2 hari.
