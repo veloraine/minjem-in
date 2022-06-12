@@ -1,4 +1,4 @@
-package id.ac.ui.cs.advprog.minjemin.userInventory.service;
+package id.ac.ui.cs.advprog.minjemin.userinventory.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,7 @@ class UserInventoryServiceTest {
 
     @BeforeEach
     void setUp() throws Exception {
-        userInventoryServiceClass = Class.forName("id.ac.ui.cs.advprog.minjemin.userInventory.service.UserInventoryService");
+        userInventoryServiceClass = Class.forName("id.ac.ui.cs.advprog.minjemin.userinventory.service.UserInventoryService");
     }
 
     @Test

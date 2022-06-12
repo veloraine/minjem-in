@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @AutoConfigureMockMvc(addFilters = false)
 @WebMvcTest(controllers = DetailController.class)
-public class DetailControllerTest {
+class DetailControllerTest {
 
     private ItemDTO itemDTO;
 

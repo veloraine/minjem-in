@@ -1,5 +1,6 @@
 package id.ac.ui.cs.advprog.minjemin.notifikasi.service;
 
+import id.ac.ui.cs.advprog.minjemin.auth.model.User;
 import id.ac.ui.cs.advprog.minjemin.auth.repository.UserRepository;
 import id.ac.ui.cs.advprog.minjemin.auth.service.SecurityService;
 import id.ac.ui.cs.advprog.minjemin.item.repository.ItemRepository;
@@ -15,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 @Service
 public class NotifikasiServiceImpl implements NotifikasiService {
+    private User userLogin;
     @Autowired
     PeminjamanRepository peminjamanRepository;
     
@@ -28,13 +30,16 @@ public class NotifikasiServiceImpl implements NotifikasiService {
     ItemRepository itemRepository;
     
     @Override
-    public List<Map> peminjamanDeadline() throws ParseException {
+    public List<Map<String, String>> peminjamanDeadline() throws ParseException {
         var usernamePengguna = securityService.findLoggedInUserDetails().getUsername();
-        var userLogin = userRepository.findByUsername(usernamePengguna).get();
+        var userLoginOptional = userRepository.findByUsername(usernamePengguna);
+        if (userLoginOptional.isPresent()) {
+            userLogin = userLoginOptional.get();
+        }
         var idPengguna = userLogin.getId();
 
         List<Peminjaman> userInventory = peminjamanRepository.findAllByUserId(idPengguna);
-        List<Map> peminjamanDekatDeadline = new ArrayList<>();
+        List<Map<String, String>> peminjamanDekatDeadline = new ArrayList<>();
         
         for (Peminjaman peminjaman : userInventory) {
             var tanggalSelesai = peminjaman.getTanggalSelesai();

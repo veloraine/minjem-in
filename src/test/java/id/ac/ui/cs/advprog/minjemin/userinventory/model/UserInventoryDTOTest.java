@@ -1,4 +1,4 @@
-package id.ac.ui.cs.advprog.minjemin.userInventory.model;
+package id.ac.ui.cs.advprog.minjemin.userinventory.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,7 @@ class UserInventoryDTOTest {
 
     @BeforeEach
     void setUp() throws Exception{
-        userInventoryDTOClass = Class.forName("id.ac.ui.cs.advprog.minjemin.userInventory.model.UserInventoryDTO");
+        userInventoryDTOClass = Class.forName("id.ac.ui.cs.advprog.minjemin.userinventory.model.UserInventoryDTO");
     }
 
     @Test

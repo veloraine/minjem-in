@@ -24,7 +24,7 @@ import java.util.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class NotifikasiServiceImplTest {
+class NotifikasiServiceImplTest {
     private UserDTO userDto;
     private User user;
     private Item item1;
@@ -110,10 +110,5 @@ public class NotifikasiServiceImplTest {
         var res = notifikasiService.peminjamanDeadline();
         assertInstanceOf(List.class, res);
         assertInstanceOf(Map.class, res.get(0));
-    }
-
-    @Test
-    void testShouldReturnCorrectDurationWhenServiceCalled() throws Exception {
-
     }
 }

@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping(path = "/auth")
 public class UserController {
+    private final String MESSAGE = "message";
     @Autowired
     private UserService userService;
 
@@ -31,7 +32,7 @@ public class UserController {
     public String register(Model model) {
         var userDTO = new User();
         model.addAttribute("user", userDTO);
-        model.addAttribute("message", "");
+        model.addAttribute(MESSAGE, "");
         return "auth/register";
     }
 
@@ -49,7 +50,7 @@ public class UserController {
         } catch (UserAlreadyExistException | WhitespaceValueException | UnmatchPasswordException e){
             var mav = new ModelAndView("auth/register");
             mav.addObject("user", userDto);
-            mav.addObject("message", e.getMessage());
+            mav.addObject(MESSAGE, e.getMessage());
             return mav;
         }
 
@@ -63,7 +64,7 @@ public class UserController {
     public String login(Model model) {
         var userDTO = new User();
         model.addAttribute("user", userDTO);
-        model.addAttribute("message", "");
+        model.addAttribute(MESSAGE, "");
         return "auth/login";
     }
 

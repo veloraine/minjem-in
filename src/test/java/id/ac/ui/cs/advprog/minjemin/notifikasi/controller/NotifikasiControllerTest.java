@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(controllers = NotifikasiController.class)
-public class NotifikasiControllerTest {
+class NotifikasiControllerTest {
     private UserDTO userDto;
     private User user;
     private Item item;

@@ -1,14 +1,13 @@
-package id.ac.ui.cs.advprog.minjemin.userInventory.service;
+package id.ac.ui.cs.advprog.minjemin.userinventory.service;
 
 import id.ac.ui.cs.advprog.minjemin.auth.model.User;
 import id.ac.ui.cs.advprog.minjemin.auth.repository.UserRepository;
 import id.ac.ui.cs.advprog.minjemin.auth.service.SecurityService;
-import id.ac.ui.cs.advprog.minjemin.item.model.Item;
 import id.ac.ui.cs.advprog.minjemin.item.repository.ItemRepository;
 import id.ac.ui.cs.advprog.minjemin.item.util.ImageProcessor;
 import id.ac.ui.cs.advprog.minjemin.peminjaman.model.Peminjaman;
 import id.ac.ui.cs.advprog.minjemin.peminjaman.repository.PeminjamanRepository;
-import id.ac.ui.cs.advprog.minjemin.userInventory.model.UserInventoryDTO;
+import id.ac.ui.cs.advprog.minjemin.userinventory.model.UserInventoryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
