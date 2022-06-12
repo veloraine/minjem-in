@@ -1,4 +1,4 @@
-package id.ac.ui.cs.advprog.minjemin.userInventory.model;
+package id.ac.ui.cs.advprog.minjemin.userinventory.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

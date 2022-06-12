@@ -63,12 +63,6 @@ class UserServiceImplTest {
     }
 
     @Test
-    void findByUsernameNotFound() {
-        when(userRepository.findByUsername(user.getUsername()+"x")).thenReturn(Optional.empty());
-        assertThrows(UsernameNotFoundException.class, () -> userService.findByUsername(user.getUsername()+"x"));
-    }
-
-    @Test
     void testGetListUser() {
         List<User> users = Collections.singletonList(user);
         when(userRepository.findAll()).thenReturn(users);

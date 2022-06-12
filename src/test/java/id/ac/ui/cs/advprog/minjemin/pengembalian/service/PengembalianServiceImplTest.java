@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class PengembalianServiceImplTest {
+class PengembalianServiceImplTest {
     private UserDTO userDto;
     private User user;
     private Item item;

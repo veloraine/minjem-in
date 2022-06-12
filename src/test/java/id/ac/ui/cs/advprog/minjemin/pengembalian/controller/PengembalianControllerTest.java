@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(controllers = PengembalianController.class)
-public class PengembalianControllerTest {
+class PengembalianControllerTest {
     private UserDTO userDto;
     private User user;
     private Item item;

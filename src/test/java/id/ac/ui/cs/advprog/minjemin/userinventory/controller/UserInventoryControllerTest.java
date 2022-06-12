@@ -1,4 +1,4 @@
-package id.ac.ui.cs.advprog.minjemin.userInventory.controller;
+package id.ac.ui.cs.advprog.minjemin.userinventory.controller;
 
 import id.ac.ui.cs.advprog.minjemin.auth.model.User;
 import id.ac.ui.cs.advprog.minjemin.auth.model.UserDTO;
@@ -6,10 +6,7 @@ import id.ac.ui.cs.advprog.minjemin.auth.security.MinjeminUserDetails;
 import id.ac.ui.cs.advprog.minjemin.auth.service.MinjeminUserDetailsService;
 import id.ac.ui.cs.advprog.minjemin.auth.service.SecurityService;
 import id.ac.ui.cs.advprog.minjemin.auth.service.UserService;
-import id.ac.ui.cs.advprog.minjemin.item.model.Item;
-import id.ac.ui.cs.advprog.minjemin.item.service.ItemService;
-import id.ac.ui.cs.advprog.minjemin.notifikasi.service.NotifikasiService;
-import id.ac.ui.cs.advprog.minjemin.userInventory.service.UserInventoryService;
+import id.ac.ui.cs.advprog.minjemin.userinventory.service.UserInventoryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +25,7 @@ import java.text.ParseException;
 
 @AutoConfigureMockMvc(addFilters = false)
 @WebMvcTest(controllers = UserInventoryController.class)
-public class UserInventoryControllerTest {
+class UserInventoryControllerTest {
     private UserDTO userDto;
     private User user;
 

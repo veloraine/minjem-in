@@ -58,7 +58,7 @@ class UserControllerTest{
         mockMvc.perform(get("/auth/userDetail")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-        
+
     }
 
     @Test

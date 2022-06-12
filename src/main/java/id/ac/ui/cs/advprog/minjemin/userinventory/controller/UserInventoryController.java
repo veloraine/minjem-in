@@ -1,8 +1,8 @@
-package id.ac.ui.cs.advprog.minjemin.userInventory.controller;
+package id.ac.ui.cs.advprog.minjemin.userinventory.controller;
 
 import id.ac.ui.cs.advprog.minjemin.auth.service.SecurityService;
 import id.ac.ui.cs.advprog.minjemin.auth.service.UserService;
-import id.ac.ui.cs.advprog.minjemin.userInventory.service.UserInventoryService;
+import id.ac.ui.cs.advprog.minjemin.userinventory.service.UserInventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -11,7 +11,7 @@ import java.lang.reflect.Modifier;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockitoExtension.class)
-public class NotifikasiServiceTest {
+class NotifikasiServiceTest {
     private Class<?> notifikasiServiceClass;
 
     @BeforeEach
