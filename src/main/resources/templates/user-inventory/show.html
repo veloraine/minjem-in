@@ -83,7 +83,7 @@
                 <a th:text="${item.getStatusPeminjaman()}"></a>
               </td>
               <td>
-                <a class="btn btn-primary btn-sm" th:if="${item.getStatusPeminjaman() == 'menunggu persetujuan'}">
+                <a class="btn btn-primary btn-sm" th:href="@{/../../peminjaman/batal/{id}(id = ${item.getPeminjamanId()})}" th:if="${item.getStatusPeminjaman() == 'menunggu persetujuan'}">
                   Batal</a>
                 <a class="btn btn-primary btn-sm" th:if="${item.getStatusPeminjaman() == 'sedang dipinjam'}">
                   Perpanjang</a>

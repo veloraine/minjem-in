@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "/peminjaman")
 public class PeminjamanController {
 
+    private static final String SESSION = "sessionId";
+
     @Autowired
     ItemService itemService;
 
@@ -34,7 +36,7 @@ public class PeminjamanController {
         }
         model.addAttribute("user", userService.findByUsername(user.getUsername()));
         model.addAttribute("item", itemService.getItemById(id));
-        model.addAttribute("sessionId", securityService.findLoggedInUserDetails());
+        model.addAttribute(SESSION, securityService.findLoggedInUserDetails());
         return "peminjaman/pinjam";
     }
 
@@ -45,7 +47,26 @@ public class PeminjamanController {
 
         var result = peminjamanService.createPeminjaman(id, tanggalMulai, tanggalSelesai);
         model.addAttribute("result", result);
-        model.addAttribute("sessionId", securityService.findLoggedInUserDetails());
+        model.addAttribute(SESSION, securityService.findLoggedInUserDetails());
         return "peminjaman/result";
+    }
+
+    @GetMapping(path = "/terima/{id}")
+    public String terimaPinjam(@PathVariable(value = "id") String id, Model model) {
+        peminjamanService.terimaPeminjaman(id);
+        return "redirect:/admin/tabel-pengajuan/";
+    }
+
+    @GetMapping(path = "/tolak/{id}")
+    public String tolakPinjam(@PathVariable(value = "id") String id, Model model) {
+        peminjamanService.tolakPeminjaman(id);
+        return "redirect:/admin/tabel-pengajuan/";
+    }
+
+    @GetMapping(path = "/batal/{id}")
+    public String batalPinjam(@PathVariable(value = "id") String id, Model model) {
+        peminjamanService.batalkanPeminjaman(id);
+        model.addAttribute(SESSION, securityService.findLoggedInUserDetails());
+        return "peminjaman/pembatalan";
     }
 }

@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class ItemController {
 
     private static final String REDIRECT = "redirect:/admin/";
+    private static final String SESSION = "sessionId";
 
     @Autowired
     ItemService itemService;
@@ -31,7 +32,7 @@ public class ItemController {
     @GetMapping(path = "/")
     public String dashboardAdmin(Model model) {
         model.addAttribute("items", itemService.getItems());
-        model.addAttribute("sessionId", securityService.findLoggedInUserDetails());
+        model.addAttribute(SESSION, securityService.findLoggedInUserDetails());
         return "admin/dashboard";
     }
 
@@ -40,13 +41,13 @@ public class ItemController {
         model.addAttribute("peminjaman", peminjamanService.getAllPeminjaman());
         model.addAttribute("itemService", itemService);
         model.addAttribute("userService", userService);
-        model.addAttribute("sessionId", securityService.findLoggedInUserDetails());
+        model.addAttribute(SESSION, securityService.findLoggedInUserDetails());
         return "admin/tabel_pengajuan";
     }
 
     @GetMapping(value = "/create")
     public String createItem(Model model) {
-        model.addAttribute("sessionId", securityService.findLoggedInUserDetails());
+        model.addAttribute(SESSION, securityService.findLoggedInUserDetails());
         return "items/add_item";
     }
 
@@ -67,7 +68,7 @@ public class ItemController {
     @GetMapping(path = "/update/{id}")
     public String updateItem(@PathVariable(value = "id") String id, Model model) {
         model.addAttribute("item", itemService.getItemById(id));
-        model.addAttribute("sessionId", securityService.findLoggedInUserDetails());
+        model.addAttribute(SESSION, securityService.findLoggedInUserDetails());
         return "items/update";
     }
 
@@ -91,17 +92,4 @@ public class ItemController {
         itemService.deleteItem(id);
         return REDIRECT;
     }
-
-    @GetMapping(path = "/tabel-pengajuan/terimaPeminjaman/{id}")
-    public String terimaPinjam(@PathVariable(value = "id") String id, Model model) {
-        peminjamanService.terimaPeminjaman(id);
-        return "redirect:/admin/tabel-pengajuan/";
-    }
-
-    @GetMapping(path = "/tabel-pengajuan/tolakPeminjaman/{id}")
-    public String tolakPinjam(@PathVariable(value = "id") String id, Model model) {
-        peminjamanService.tolakPeminjaman(id);
-        return "redirect:/admin/tabel-pengajuan/";
-    }
-
 }

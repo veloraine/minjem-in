@@ -97,4 +97,32 @@ class PeminjamanControllerTest {
 
     }
 
+    @Test
+    void whenGetTerimaPinjamShouldFound() throws Exception {
+        when(itemService.getItemById("9000")).thenReturn(item);
+        mockMvc.perform(get("/peminjaman/terima/9000"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(handler().methodName("terimaPinjam"))
+                .andExpect(model().attributeDoesNotExist())
+                .andExpect(redirectedUrl("/admin/tabel-pengajuan/"));
+    }
+
+    @Test
+    void whenGetTolakPinjamShouldFound() throws Exception {
+        when(itemService.getItemById("9000")).thenReturn(item);
+        mockMvc.perform(get("/peminjaman/tolak/9000"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(handler().methodName("tolakPinjam"))
+                .andExpect(model().attributeDoesNotExist())
+                .andExpect(redirectedUrl("/admin/tabel-pengajuan/"));
+    }
+
+    @Test
+    void whenGetBatalPinjamShouldFound() throws Exception {
+        when(itemService.getItemById("9000")).thenReturn(item);
+        mockMvc.perform(get("/peminjaman/batal/9000"))
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(handler().methodName("batalPinjam"))
+                .andExpect(model().attributeDoesNotExist());
+    }
 }

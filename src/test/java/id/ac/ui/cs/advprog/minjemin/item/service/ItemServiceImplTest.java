@@ -4,6 +4,8 @@ import id.ac.ui.cs.advprog.minjemin.item.model.Item;
 import id.ac.ui.cs.advprog.minjemin.item.model.ItemDTO;
 import id.ac.ui.cs.advprog.minjemin.item.repository.ItemRepository;
 import id.ac.ui.cs.advprog.minjemin.item.util.ImageProcessor;
+import id.ac.ui.cs.advprog.minjemin.peminjaman.model.Peminjaman;
+import id.ac.ui.cs.advprog.minjemin.peminjaman.repository.PeminjamanRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -34,6 +36,9 @@ class ItemServiceImplTest {
     @InjectMocks
     ItemServiceImpl itemService;
 
+    @Mock
+    PeminjamanRepository peminjamanRepository;
+
     @BeforeEach
     void setUp() {
         item = Item.builder()
@@ -63,6 +68,42 @@ class ItemServiceImplTest {
         List<Item> itemList = new ArrayList<>();
         when(itemRepository.findAll()).thenReturn(itemList);
         Item chosenItem = itemService.getItemById("1");
+        assertNull(chosenItem);
+    }
+
+    @Test
+    void testGetItemDTOById() {
+        List<ItemDTO> itemList = new ArrayList<>();
+        List<Item> items = new ArrayList<>();
+        items.add(item);
+        ItemDTO itemDTO = new ItemDTO("item-1", "koper", "bagus", 900, "tersedia", "koper.jpg");
+        itemList.add(itemDTO);
+        when(itemRepository.findAll()).thenReturn(items);
+        ItemDTO chosenItem = itemService.getItemDTOById("item-1");
+        assertEquals(chosenItem.getId(), item.getId());
+    }
+
+    @Test
+    void testGetItemDTOByIdWhenEmpty() {
+        List<ItemDTO> itemList = new ArrayList<>();
+        List<Item> items = new ArrayList<>();
+        items.add(item);
+        ItemDTO itemDTO = new ItemDTO("1", "koper", "bagus", 900, "tersedia", "koper.jpg");
+        itemList.add(itemDTO);
+        when(itemRepository.findAll()).thenReturn(items);
+        ItemDTO chosenItem = itemService.getItemDTOById("1");
+        assertNull(chosenItem);
+    }
+
+    @Test
+    void testGetItemDTOByIdWhenNoExist() {
+        List<ItemDTO> itemList = new ArrayList<>();
+        List<Item> items = new ArrayList<>();
+        items.add(item);
+        ItemDTO itemDTO = new ItemDTO("item-1", "koper", "bagus", 900, "tersedia", "koper.jpg");
+        itemList.add(itemDTO);
+        when(itemRepository.findAll()).thenReturn(items);
+        ItemDTO chosenItem = itemService.getItemDTOById("item-2");
         assertNull(chosenItem);
     }
 
@@ -160,6 +201,12 @@ class ItemServiceImplTest {
 
     @Test
     void testDeleteItem() throws Exception {
+        Peminjaman peminjaman1 = new Peminjaman("pinjam-1", "user-1", "item-1",
+                "2002-01-01", "2003-01-01", "menunggu", "belum dibayar");
+
+        List<Peminjaman> peminjamanList = new ArrayList<>();
+        peminjamanList.add(peminjaman1);
+
         byte[] scouter = "scouter".getBytes();
         MockMultipartFile file = new MockMultipartFile(
                 "file", "Scouter.jpeg", "image/jpeg", scouter);
@@ -168,10 +215,14 @@ class ItemServiceImplTest {
         itemService.deleteItem("0");
         lenient().when(itemRepository.getById("0")).thenReturn(null);
         assertNull(itemRepository.getById("0"));
+
+        lenient().when(peminjamanRepository.findAllByItemId("item-1")).thenReturn(peminjamanList);
+        assertEquals(0, peminjamanRepository.findAll().size());
     }
 
     @Test
-    void testDeleteNonExistentEditorById() throws Exception{
+    void testDeleteNonExistent() throws Exception{
+        List<Peminjaman> peminjamanList = new ArrayList<>();
         byte[] scouter = "scouter".getBytes();
         MockMultipartFile file = new MockMultipartFile(
                 "file", "Scouter.jpeg", "image/jpeg", scouter);
@@ -179,6 +230,23 @@ class ItemServiceImplTest {
         lenient().when(itemRepository.getById("0")).thenReturn(null);
         itemService.deleteItem("0");
         assertNull(itemRepository.getById("0"));
+        lenient().when(peminjamanRepository.findAllByItemId("item-1")).thenReturn(peminjamanList);
     }
 
+    @Test
+    void testDeleteItemWhenNoDeletePeminjaman() throws Exception {
+        List<Peminjaman> peminjamanList = new ArrayList<>();
+
+        byte[] scouter = "scouter".getBytes();
+        MockMultipartFile file = new MockMultipartFile(
+                "file", "Scouter.jpeg", "image/jpeg", scouter);
+        itemService.createItem(item.getName(), item.getDesc(), item.getHarga(), file);
+        lenient().when(itemRepository.getById("0")).thenReturn(item);
+        itemService.deleteItem("0");
+        lenient().when(itemRepository.getById("0")).thenReturn(null);
+        assertNull(itemRepository.getById("0"));
+
+        lenient().when(peminjamanRepository.findAllByItemId("item-1")).thenReturn(peminjamanList);
+        assertEquals(0, peminjamanRepository.findAll().size());
+    }
 }

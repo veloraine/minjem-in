@@ -160,8 +160,6 @@ class PeminjamanServiceImplTest {
         when(peminjamanRepository.findPeminjamanById("pinjam-1")).thenReturn(pinjam1);
         peminjamanService.tolakPeminjaman("pinjam-1");
         assertEquals("Ditolak", pinjam1.getStatus());
-
-
     }
 
     @Test
@@ -171,6 +169,15 @@ class PeminjamanServiceImplTest {
         when(peminjamanRepository.findPeminjamanById("pinjam-1")).thenReturn(pinjam1);
         peminjamanService.terimaPeminjaman("pinjam-1");
         assertEquals("Diterima", pinjam1.getStatus());
+    }
+
+    @Test
+    void testBatalPeminjaman(){
+        Peminjaman pinjam1 = new Peminjaman("pinjam-1", "user-1", "item-1",
+                "2002-01-01", "2003-01-01", "menunggu", "belum dibayar");
+        when(peminjamanRepository.findPeminjamanById("pinjam-1")).thenReturn(pinjam1);
+        peminjamanService.batalkanPeminjaman("pinjam-1");
+        assertEquals("Dibatalkan", pinjam1.getStatus());
     }
 
     @Test

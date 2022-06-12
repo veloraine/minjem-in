@@ -4,6 +4,8 @@ import id.ac.ui.cs.advprog.minjemin.item.model.Item;
 import id.ac.ui.cs.advprog.minjemin.item.repository.ItemRepository;
 import id.ac.ui.cs.advprog.minjemin.item.model.ItemDTO;
 import id.ac.ui.cs.advprog.minjemin.item.util.ImageProcessor;
+import id.ac.ui.cs.advprog.minjemin.peminjaman.model.Peminjaman;
+import id.ac.ui.cs.advprog.minjemin.peminjaman.repository.PeminjamanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,6 +20,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     ItemRepository itemRepository;
+
+    @Autowired
+    PeminjamanRepository peminjamanRepository;
 
     @Override
     public Item getItemById(String id) {
@@ -77,10 +82,10 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public void updateStatusItem(String id, int code) {
-        Item item = itemRepository.getById(id);
+        var item = itemRepository.getById(id);
         if (code == 1) {
             item.setStatus("tidak tersedia");
-        } else if (code == 2) {
+        } else {
             item.setStatus("tersedia");
         }
     }
@@ -92,7 +97,7 @@ public class ItemServiceImpl implements ItemService {
         List<ItemDTO> itemDTO = new ArrayList<>();
         for (Item item: items) {
             byte[] profileByte = item.getProfilePic();
-            String encode64 = imageProcessor.generateStringImage(profileByte);
+            var encode64 = imageProcessor.generateStringImage(profileByte);
             var objectDTO = new ItemDTO(item.getId(), item.getName(), item.getDesc(), item.getHarga(), item.getStatus(), encode64);
             itemDTO.add(objectDTO);
         }
@@ -103,7 +108,10 @@ public class ItemServiceImpl implements ItemService {
     public void deleteItem(String id) {
         var item = itemRepository.getById(id);
         itemRepository.delete(item);
-
+        List<Peminjaman> peminjaman = peminjamanRepository.findAllByItemId(id);
+        for (Peminjaman i : peminjaman) {
+            peminjamanRepository.delete(i);
+        }
     }
     @Transactional
     @Override

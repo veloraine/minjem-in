@@ -43,16 +43,23 @@ public class PeminjamanServiceImpl implements PeminjamanService{
 
     @Override
     public void tolakPeminjaman(String id) {
-        Peminjaman pinjam = peminjamanRepository.findPeminjamanById(id);
+        var pinjam = peminjamanRepository.findPeminjamanById(id);
         pinjam.setStatus("Ditolak");
         itemService.updateStatusItem(pinjam.getItemId(), 2);
     }
 
     @Override
     public void terimaPeminjaman(String id) {
-        Peminjaman pinjam = peminjamanRepository.findPeminjamanById(id);
+        var pinjam = peminjamanRepository.findPeminjamanById(id);
         pinjam.setStatus("Diterima");
         itemService.updateStatusItem(pinjam.getItemId(), 1);
+    }
+
+    @Override
+    public void batalkanPeminjaman(String id) {
+        var pinjam = peminjamanRepository.findPeminjamanById(id);
+        pinjam.setStatus("Dibatalkan");
+        itemService.updateStatusItem(pinjam.getItemId(), 2);
     }
 
     @Override
