@@ -249,4 +249,11 @@ class ItemServiceImplTest {
         lenient().when(peminjamanRepository.findAllByItemId("item-1")).thenReturn(peminjamanList);
         assertEquals(0, peminjamanRepository.findAll().size());
     }
+
+    @Test
+    void testGetItemDTOMethod() {
+        when(itemRepository.findItemById("item-1")).thenReturn(item);
+        var res = itemService.getItemObject("item-1");
+        assertEquals("item-1", res.getId());
+    }
 }
