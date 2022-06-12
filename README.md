@@ -39,10 +39,10 @@ Microservice: [minjem-in-payment-staging.herokuapp.com](https://minjem-in-paymen
 2. Pembatalan peminjaman untuk user (oleh Zaki)
    - Pengguna dapat membatalkan permintaan peminjaman produk yang statusnya masih menunggu persetujuan admin
 
-2. Notifikasi Tenggat Peminjaman (oleh Ricky)
+3. Notifikasi Tenggat Peminjaman (oleh Ricky)
    - Notifikasi ini merupakan fitur yang diimplementasikan pada navbar pengguna.
    - Implementasi fitur ini berupa button yang dapat diklik dan berisi peminjaman-peminjaman pengguna yang berdurasi < 2 hari.
-3. Pengembalian Barang (oleh Ricky)
+4. Pengembalian Barang (oleh Ricky)
    - Pengguna dapat mengembalikan barang yang telah mereka pinjam dengan menekan tombol kembalikan.
    - Setelah pengguna mengembalikan barang, barang tersebut akan tersedia untuk dipinjam dan dapat dilihat pada dashboard.
   
